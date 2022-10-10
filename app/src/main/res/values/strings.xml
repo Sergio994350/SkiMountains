@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">SkiMountains</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_save">Save</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_detail">Detail</string>
+
+    <string name="main_screen_title">Горнолыжные курорты России</string>
+    <string name="ural">Урал</string>
+    <string name="popular_places">Популярные места</string>
+    <string name="subtitle_main_rv">Популярные места</string>
+    <string name="abzakovo">Абзаково, Башкортостан (Урал)</string>
+    <string name="search_ski_place">Поиск курорта</string>
+    <string name="saved_ski_places">Сохраненные курорты</string>
+    <string name="abzakovo_web_cite">https://abzakovo.com</string>
+    <string name="abzakovo_web_cameras">https://abzakovo.com/glc/camera/</string>
+    <string name="height_diff">Перепад высот: 320 м</string>
+    <string name="max_height">Максимальная высота: 819 м</string>
+    <string name="sum_trails_length">Общая длина трасс: 16.0 км</string>
+    <string name="max_length_trail">Максимальная длина трассы: 2.8 км</string>
+    <string name="see_video_on_youtube">See video on YouTube</string>
+    <string name="galochka_v_kvadrate">☑</string>
+    <string name="krestik_v_kvadrate">☒</string>
+    <string name="okruzhnost">●</string>
 </resources>

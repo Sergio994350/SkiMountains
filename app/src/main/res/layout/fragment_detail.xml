@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".feature_ski_places.presentation.ui.DetailFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_230sdp"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/CollapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+
+            <ImageView
+                android:id="@+id/image_ski_place_big_details"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        app:layout_anchorGravity="center"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/name_ski_place_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/abzakovo"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/region_category_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/ural"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/name_ski_place_details"
+                app:layout_constraintTop_toBottomOf="@+id/name_ski_place_details" />
+
+            <TextView
+                android:id="@+id/web_cite_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/abzakovo_web_cite"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/region_category_details"
+                app:layout_constraintTop_toBottomOf="@+id/region_category_details" />
+
+
+            <TextView
+                android:id="@+id/web_cameras_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/abzakovo_web_cameras"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/web_cite_details"
+                app:layout_constraintTop_toBottomOf="@+id/web_cite_details" />
+
+            <TextView
+                android:id="@+id/height_diff_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/height_diff"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/web_cameras_details"
+                app:layout_constraintTop_toBottomOf="@+id/web_cameras_details" />
+
+            <TextView
+                android:id="@+id/max_height_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/max_height"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/height_diff_details"
+                app:layout_constraintTop_toBottomOf="@+id/height_diff_details" />
+
+            <TextView
+                android:id="@+id/sum_trails_length_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/sum_trails_length"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/max_height_details"
+                app:layout_constraintTop_toBottomOf="@+id/max_height_details" />
+
+            <TextView
+                android:id="@+id/max_length_trail_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="@string/max_length_trail"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/sum_trails_length_details"
+                app:layout_constraintTop_toBottomOf="@+id/sum_trails_length_details" />
+
+            <LinearLayout
+                android:id="@+id/trails_ll_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="max_length_trail_details"
+                app:layout_constraintTop_toBottomOf="@+id/max_length_trail_details">
+
+                <TextView
+                    android:id="@+id/all_trails_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="Трассы: "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/green_trails_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="●7 "
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/blue_trails_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="●5 "
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/red_trails_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="●2 "
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/black_trails_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="●0 "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lifts_ll_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="trails_ll_details"
+                app:layout_constraintTop_toBottomOf="@+id/trails_ll_details">
+
+                <TextView
+                    android:id="@+id/all_lifts_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="Подъемники: "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/tow_lifts_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:drawableLeft="@drawable/ic_tow_lift"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="6 "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/chair_lifts_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:drawableLeft="@drawable/ic_chair_lift"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="2 "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/cabin_lifts_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:drawableLeft="@drawable/ic_cabin_lift"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="0 "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/season_dates_ll_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="lifts_ll_details"
+                app:layout_constraintTop_toBottomOf="@+id/lifts_ll_details">
+
+                <TextView
+                    android:id="@+id/season_date_begin_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="Сезон: с 02/11 "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/season_date_end_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:text="по 10/04"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/railway_awail_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="Ж/д станция: ☑"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/season_dates_ll_details"
+                app:layout_constraintTop_toBottomOf="@+id/season_dates_ll_details" />
+
+            <TextView
+                android:id="@+id/night_ride_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="Ночное катание: ☑"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/railway_awail_details"
+                app:layout_constraintTop_toBottomOf="@+id/railway_awail_details" />
+
+            <TextView
+                android:id="@+id/how_to_get_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="Как добраться"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintLeft_toLeftOf="@+id/night_ride_details"
+                app:layout_constraintTop_toBottomOf="@+id/night_ride_details" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:backgroundTint="@color/youtube"
+        android:clickable="true"
+        android:contentDescription="@string/see_video_on_youtube"
+        android:focusable="true"
+        android:src="@drawable/ic_play_arrow_24"
+        app:elevation="@dimen/_5sdp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="end|bottom"
+        app:shapeAppearanceOverlay="@style/fab_square" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_back"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="10dp"
+        app:elevation="5dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="top|left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_view_arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:src="@drawable/ic_arrow_back_24" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_save_ski_place_details"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="10dp"
+        app:elevation="5dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="top|right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_view_save_ski_place_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_bookmark_24" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
