@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home2_to_details"
-            app:destination="@id/navigation_detail"
+            app:destination="@id/details"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -20,13 +20,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_detail"
+        android:id="@+id/details"
         android:name="com.epicteam1.skimountains.feature_ski_places.presentation.ui.DetailFragment"
-        android:label="fragment_detail"
+        android:label="fragment_details"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="details"
-            app:argType="com.sergio994350.skiride.model.SkiPlace" />
+            app:argType="com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace" />
         <action
             android:id="@+id/action_details_to_home2"
             app:destination="@id/navigation_home"
@@ -45,8 +45,8 @@
         tools:layout="@layout/fragment_save" >
         <action
             android:id="@+id/action_saveSkiPlace_to_details"
-            app:destination="@id/navigation_detail"
-            app:popUpTo="@id/navigation_detail"
+            app:destination="@id/details"
+            app:popUpTo="@id/details"
             app:popUpToInclusive="true" />
     </fragment>
 

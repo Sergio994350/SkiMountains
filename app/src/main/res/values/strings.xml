@@ -15,12 +15,18 @@
     <string name="saved_ski_places">Сохраненные курорты</string>
     <string name="abzakovo_web_cite">https://abzakovo.com</string>
     <string name="abzakovo_web_cameras">https://abzakovo.com/glc/camera/</string>
-    <string name="height_diff">Перепад высот: 320 м</string>
-    <string name="max_height">Максимальная высота: 819 м</string>
-    <string name="sum_trails_length">Общая длина трасс: 16.0 км</string>
-    <string name="max_length_trail">Максимальная длина трассы: 2.8 км</string>
+    <string name="technical_data">Перепад высот: 320м, максимальная высота: 819 м,
+        общая длина трасс: 16.0 км, максимальная длина одной трассы: 2.8 км,
+        Трассы: зеленых: 7, синих: 5, красных: 2, черных: 0</string>
+    <string name="description_data">Подъемники бугельные: 6 , кресельныеЖ 2, кабины: 0.
+        Начало сезона: 02/11, конец сезона: 10/04.
+        Ж/д станция рядом: ☑, ночное катание: ☑</string>
+    <string name="geo_data">Города рядом: Белорецк (27), Магнитогорск (60), Верхнеуральск (78).
+        Координаты: широта 53.796257, долгота: 58.622145</string>
+
     <string name="see_video_on_youtube">See video on YouTube</string>
     <string name="galochka_v_kvadrate">☑</string>
     <string name="krestik_v_kvadrate">☒</string>
     <string name="okruzhnost">●</string>
+
 </resources>
