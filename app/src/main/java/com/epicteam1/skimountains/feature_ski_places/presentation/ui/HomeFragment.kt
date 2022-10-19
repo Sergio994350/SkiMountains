@@ -1,33 +1,54 @@
 package com.epicteam1.skimountains.feature_ski_places.presentation.ui
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epicteam1.skimountains.MainActivity
 import com.epicteam1.skimountains.R
-import com.epicteam1.skimountains.feature_ski_places.domain.model.Category
-import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.CategoryAdapter
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SkiPlacesAdapter
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiViewModel
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     lateinit var viewModel: SkiViewModel
-    lateinit var skiPlacesAdapter: SkiPlacesAdapter  // TODO
-    lateinit var categoryAdapter: CategoryAdapter
-    lateinit var ctg: Category
+    lateinit var skiPlacesAdapter: SkiPlacesAdapter
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = (activity as MainActivity).viewModel
-
         setupRecyclerViewMain()
-        setupRecyclerViewCategory()
+        initDatabase()
+
+        viewModel.getAllSkiPlaces().observe(viewLifecycleOwner, Observer { it ->
+            skiPlacesAdapter.differ.submitList(it)
+        })
+
+        skiPlacesAdapter.setOnItemClickListener { Place ->
+            val bundle = Bundle().apply {
+                putSerializable("details", Place)
+            }
+            findNavController().navigate(R.id.action_home2_to_details, bundle)
+        }
+
+        skiPlacesAdapter.setOnItemClickListener2 {
+            viewModel.saveSkiPlace(it)
+            Snackbar.make(view, "Ski Place Saved", Snackbar.LENGTH_SHORT).apply {
+                animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                setBackgroundTint(Color.DKGRAY)
+                setTextColor(Color.WHITE)
+                show()
+            }
+        }
     }
 
 
@@ -39,11 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun setupRecyclerViewCategory() {
-        categoryAdapter = CategoryAdapter()
-        recycler_view_categories.apply {
-            adapter = categoryAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
+    fun initDatabase() {
+        viewModel.getAllSkiPlacesFb()
     }
 }

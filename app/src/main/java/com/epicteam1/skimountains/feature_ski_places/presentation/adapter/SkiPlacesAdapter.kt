@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_ski_place.view.*
 
 
 class SkiPlacesAdapter : RecyclerView.Adapter<SkiPlacesAdapter.ViewHolder>() {
-    inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
+    inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item.rootView)
 
     private val differCallback = object : DiffUtil.ItemCallback<SkiPlace>() {
         override fun areItemsTheSame(oldItem: SkiPlace, newItem: SkiPlace): Boolean {
@@ -39,7 +39,7 @@ class SkiPlacesAdapter : RecyclerView.Adapter<SkiPlacesAdapter.ViewHolder>() {
         val place = differ.currentList[position]
         holder.itemView.apply {
             Glide.with(this).load(place.mainPic).into(image_view_item_ski_place)
-            name_ski_place.text = "${place.nameRus}, ${place.regionRus} (${place.regionBig})"
+            name_ski_place.text = "${place.nameRus} ${place.regionRus}"
             card_save.setOnClickListener {
                 onItemClickListener2?.let { it(place) }
                 card_save.setCardBackgroundColor(Color.WHITE);

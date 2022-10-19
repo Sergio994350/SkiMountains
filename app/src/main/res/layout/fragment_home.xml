@@ -50,17 +50,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_view_fragment_home_title"
                 tools:ignore="RtlSymmetry" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_categories"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_ski_place"
-                tools:listitem="@layout/item_region_category" />
-
             <TextView
                 android:id="@+id/subtitle_main_res_view"
                 android:layout_width="wrap_content"
@@ -73,7 +62,7 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view_categories" />
+                app:layout_constraintTop_toBottomOf="@+id/search_ski_place" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_ski_places"

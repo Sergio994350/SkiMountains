@@ -11,19 +11,19 @@ import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 @Dao
 interface SkiDao {
 
-    @Query("SELECT * FROM ski_place_local_table")
-    suspend fun getAllSkiPlaces(): LiveData<List<SkiPlace>>
+    @Query("SELECT * FROM ski_place_table")
+    fun getAllSkiPlaces(): LiveData<List<SkiPlace>>
 
-    @Query("SELECT * FROM ski_place_local_table WHERE skiPlaceId = :id")
-    suspend fun getSkiPlaceById(id: String): SkiPlace
+    @Query("SELECT * FROM ski_place_table WHERE skiPlaceId = :id")
+    fun getSkiPlaceById(id: String): SkiPlace
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(skiPlace: SkiPlace)
+    fun upsert(skiPlace: SkiPlace)
 
     @Delete
-    suspend fun deleteSkiPlace(skiPlace: SkiPlace)
+    fun deleteSkiPlace(skiPlace: SkiPlace)
 
-    @Query("DELETE FROM ski_place_local_table")
-    suspend fun deleteAllRecords()
+    @Query("DELETE FROM ski_place_table")
+    fun deleteAllRecords()
 
 }

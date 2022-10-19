@@ -1,14 +1,18 @@
 package com.epicteam1.skimountains.feature_ski_places.presentation.viewModel
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.epicteam1.skimountains.feature_ski_places.domain.model.CategoriesList
+import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
-import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlacesList
 import com.epicteam1.skimountains.feature_ski_places.domain.repository.SkiPlaceRepository
-import com.epicteam1.skimountains.feature_ski_places.domain.util.Resource
 import kotlinx.coroutines.launch
 
 class SkiViewModel(
@@ -16,42 +20,77 @@ class SkiViewModel(
     val skiPlaceRepository: SkiPlaceRepository
 ) : AndroidViewModel(app) {
 
-    val search: MutableLiveData<Resource<SkiPlacesList>> = MutableLiveData()
-    val filter: MutableLiveData<Resource<SkiPlacesList>> = MutableLiveData()
-    val details: MutableLiveData<Resource<SkiPlacesList>> = MutableLiveData()
-    val category: MutableLiveData<Resource<CategoriesList>> = MutableLiveData()
+    val search: LiveData<List<SkiPlace>> = MutableLiveData()
+    val details: LiveData<SkiPlace> = MutableLiveData()
+    val filter: LiveData<List<SkiPlace>> = MutableLiveData()
+    val TAG = "ski_place_firebase"
 
-    init {
-        getCategory() // Upper RecyclerView
-        getFilter("Урал") // Lower RecyclerView
+    // search from home fragment - TODO
+    fun getSearchFb(search: String) = viewModelScope.launch {
+        skiPlaceRepository.getSearchFirebase(search)
     }
 
-    fun getSearch(search: String) = viewModelScope.launch {
-//        safeGetSearchSkiPlace(search) // TODO
+    fun getAllSkiPlacesFb() {
+        try {
+            if (hasInternetConnection()) {
+                skiPlaceRepository.getInitAllSkiPlacesFirebase()
+                Log.d(TAG, "Success")
+            } else {
+                Log.d(TAG, "No internet connection!")
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 
-    fun getCategory() = viewModelScope.launch {
-//        safeGetCategory(search) // TODO
-    }
 
-    fun getFilter(category: String) = viewModelScope.launch {
-//        safeGetFilter(category) // TODO
-    }
-
+    // detail fragment - TODO
     fun getDetails(id: String) = viewModelScope.launch {
-//        safeGetDetails(id) // TODO
+        skiPlaceRepository.getSkiPlaceById(id)
     }
 
+    // save fragment
     fun saveSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         skiPlaceRepository.upsert(skiPlace)
     }
 
-    suspend fun getAllSkiPlaces() = skiPlaceRepository.getAllSkiPlaces()
+    fun getAllSkiPlaces() = skiPlaceRepository.getAllSkiPlaces()
 
-    fun deleteFood(skiPlace: SkiPlace) = viewModelScope.launch {
+    fun deleteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         skiPlaceRepository.deleteSkiPlace(skiPlace)
     }
 
+    // save fragment - TODO
+    fun saveSkiPlaceSaved(skiPlace: SkiPlace) = viewModelScope.launch {
+        skiPlaceRepository.upsert(skiPlace)
+    }
 
+
+    // function for checking internet connection for API>=23 and <23
+    private fun hasInternetConnection(): Boolean {
+        val connectivityManager = getApplication<SkiApp>()
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val activeNetwork = connectivityManager.activeNetwork ?: return false
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+            return when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            connectivityManager.activeNetworkInfo?.run {
+                return when (type) {
+                    ConnectivityManager.TYPE_WIFI -> true
+                    ConnectivityManager.TYPE_MOBILE -> true
+                    ConnectivityManager.TYPE_ETHERNET -> true
+                    else -> false
+                }
+            }
+        }
+        return false
+    }
 
 }

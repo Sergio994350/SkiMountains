@@ -39,7 +39,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/saveSkiPlace"
+        android:id="@+id/navigation_save"
         android:name="com.epicteam1.skimountains.feature_ski_places.presentation.ui.SaveFragment"
         android:label="fragment_save"
         tools:layout="@layout/fragment_save" >
