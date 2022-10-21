@@ -85,4 +85,7 @@ dependencies {
     // Firestore to LiveData
     implementation "com.github.ptrbrynt:FirestoreLiveData:1.1.1"
 
+    // Lottie
+    implementation 'com.airbnb.android:lottie:3.6.1'
+
 }

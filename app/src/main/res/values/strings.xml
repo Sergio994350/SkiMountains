@@ -28,5 +28,7 @@
     <string name="galochka_v_kvadrate">☑</string>
     <string name="krestik_v_kvadrate">☒</string>
     <string name="okruzhnost">●</string>
+    <string name="ski_places_app">Ski Places App</string>
+    <string name="version_1_0">Version 1.0</string>
 
 </resources>
