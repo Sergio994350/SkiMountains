@@ -13,6 +13,8 @@ import androidx.lifecycle.viewModelScope
 import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.repository.SkiPlaceRepository
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.NO_INTERNET
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SUCCESS
 import kotlinx.coroutines.launch
 
 class SkiViewModel(
@@ -34,15 +36,14 @@ class SkiViewModel(
         try {
             if (hasInternetConnection()) {
                 skiPlaceRepository.getInitAllSkiPlacesFirebase()
-                Log.d(TAG, "Success")
+                Log.d(TAG, SUCCESS)
             } else {
-                Log.d(TAG, "No internet connection!")
+                Log.d(TAG, NO_INTERNET)
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
     }
-
 
     // detail fragment - TODO
     fun getDetails(id: String) = viewModelScope.launch {
@@ -51,10 +52,12 @@ class SkiViewModel(
 
     // save fragment
     fun saveSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
-        skiPlaceRepository.upsert(skiPlace)
+        skiPlaceRepository.saveSkiPlace(skiPlace)
     }
 
     fun getAllSkiPlaces() = skiPlaceRepository.getAllSkiPlaces()
+
+    fun getAllSkiPlacesSaved() = skiPlaceRepository.getAllSkiPlacesSaved()
 
     fun deleteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         skiPlaceRepository.deleteSkiPlace(skiPlace)
@@ -64,7 +67,6 @@ class SkiViewModel(
     fun saveSkiPlaceSaved(skiPlace: SkiPlace) = viewModelScope.launch {
         skiPlaceRepository.upsert(skiPlace)
     }
-
 
     // function for checking internet connection for API>=23 and <23
     private fun hasInternetConnection(): Boolean {
@@ -92,5 +94,4 @@ class SkiViewModel(
         }
         return false
     }
-
 }

@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SAVED
 
 @Dao
 interface SkiDao {
@@ -15,7 +16,10 @@ interface SkiDao {
     fun getAllSkiPlaces(): LiveData<List<SkiPlace>>
 
     @Query("SELECT * FROM ski_place_table WHERE skiPlaceId = :id")
-    fun getSkiPlaceById(id: String): SkiPlace
+    fun getSkiPlaceById(id: String): LiveData<SkiPlace>
+
+    @Query("SELECT * FROM ski_place_table WHERE isSaved = $SAVED")
+    fun getSkiPlacesSavedList(): LiveData<List<SkiPlace>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsert(skiPlace: SkiPlace)

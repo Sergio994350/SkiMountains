@@ -38,7 +38,7 @@ class SaveAdapter : RecyclerView.Adapter<SaveAdapter.ViewHolder>() {
         holder.itemView.apply {
             Glide.with(context).load(save.mainPic).into(image_view_item_saved_ski_place)
             name_saved_ski_place.text =
-                save.nameRus + ", " + save.regionRus + " (" + save.regionBig + ")"
+                save.nameRus + " " + save.regionRus
             setOnClickListener {
                 onItemClickListener?.let { it(save) }
             }

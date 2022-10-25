@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.epicteam1.skimountains.MainActivity
 import com.epicteam1.skimountains.R
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SKI_PLACE_SAVED
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -29,7 +30,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         card_view_save_ski_place_details.setOnClickListener {
 //            viewModel.saveSkiPlace(skiPlace) // TODO:
-            Snackbar.make(view, "Ski Place Saved", Snackbar.LENGTH_SHORT).apply {
+            Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                 setBackgroundTint(Color.DKGRAY)
                 setTextColor(Color.WHITE)

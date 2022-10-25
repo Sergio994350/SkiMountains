@@ -10,6 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epicteam1.skimountains.MainActivity
 import com.epicteam1.skimountains.R
+import com.epicteam1.skimountains.SplashActivity.Companion.startCount
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.DETAILS
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SKI_PLACE_SAVED
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SkiPlacesAdapter
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -27,7 +30,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel = (activity as MainActivity).viewModel
         setupRecyclerViewMain()
-        initDatabase()
+
+        if (startCount == 1) {
+            initDatabase()            
+        }
 
         viewModel.getAllSkiPlaces().observe(viewLifecycleOwner, Observer { it ->
             skiPlacesAdapter.differ.submitList(it)
@@ -35,14 +41,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         skiPlacesAdapter.setOnItemClickListener { Place ->
             val bundle = Bundle().apply {
-                putSerializable("details", Place)
+                putSerializable(DETAILS, Place)
             }
             findNavController().navigate(R.id.action_home2_to_details, bundle)
         }
 
         skiPlacesAdapter.setOnItemClickListener2 {
             viewModel.saveSkiPlace(it)
-            Snackbar.make(view, "Ski Place Saved", Snackbar.LENGTH_SHORT).apply {
+            Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                 setBackgroundTint(Color.DKGRAY)
                 setTextColor(Color.WHITE)
@@ -60,7 +66,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    fun initDatabase() {
+    private fun initDatabase() {
+        startCount++
         viewModel.getAllSkiPlacesFb()
     }
 }

@@ -4,6 +4,8 @@ import android.util.Log
 import com.epicteam1.skimountains.feature_ski_places.data.local.SkiDatabase
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.NOT_SAVED
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SAVED
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SkiPlaceRepository(
@@ -70,8 +72,23 @@ class SkiPlaceRepository(
 
     // database
     fun upsert(skiPlace: SkiPlace) = skiDatabase.getSkiDao().upsert(skiPlace)
+
+    fun saveSkiPlace(skiPlace: SkiPlace) {
+        if (skiPlace.isSaved != SAVED) {
+            skiPlace.isSaved = SAVED
+        }
+        skiDatabase.getSkiDao().upsert(skiPlace)
+    }
+
     fun getAllSkiPlaces() = skiDatabase.getSkiDao().getAllSkiPlaces()
-    fun deleteSkiPlace(skiPlace: SkiPlace) =
+
+    fun getAllSkiPlacesSaved() = skiDatabase.getSkiDao().getSkiPlacesSavedList()
+
+    fun deleteSkiPlace(skiPlace: SkiPlace) {
+        if (skiPlace.isSaved == SAVED) {
+            skiPlace.isSaved = NOT_SAVED
+        }
         skiDatabase.getSkiDao().deleteSkiPlace(skiPlace)
+    }
 
 }

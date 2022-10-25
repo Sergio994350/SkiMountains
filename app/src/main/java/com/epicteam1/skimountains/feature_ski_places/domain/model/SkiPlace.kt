@@ -40,5 +40,6 @@ data class SkiPlace(
     val webCite: String = "",
     val youTubeLink: String = "",
     val entity: String = "",
+    var isSaved: String = "",
 ) : Serializable
 

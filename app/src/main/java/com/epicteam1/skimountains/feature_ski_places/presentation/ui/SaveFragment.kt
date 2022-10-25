@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.epicteam1.skimountains.MainActivity
 import com.epicteam1.skimountains.R
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.DETAILS
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SKI_PLACE_DELETED
+import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.UNDO
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SaveAdapter
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -28,12 +31,12 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         viewModel = (activity as MainActivity).viewModel
         setupRecyclerView()
 
-        viewModel.getAllSkiPlaces().observe(viewLifecycleOwner, Observer { it ->
+        viewModel.getAllSkiPlacesSaved().observe(viewLifecycleOwner, Observer { it ->
             saveAdapter.differ.submitList(it)
         })
         saveAdapter.setOnItemClickListener { Place ->
             val bundle = Bundle().apply {
-                putSerializable("details", Place)
+                putSerializable(DETAILS, Place)
             }
             findNavController().navigate(R.id.action_saveSkiPlace_to_details, bundle)
         }
@@ -55,12 +58,12 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
                 val place = saveAdapter.differ.currentList[position]
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
                     viewModel.deleteSkiPlace(place)
-                    Snackbar.make(view, "Ski Place Deleted", Snackbar.LENGTH_LONG).apply {
+                    Snackbar.make(view, SKI_PLACE_DELETED, Snackbar.LENGTH_LONG).apply {
                         animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                         setBackgroundTint(Color.DKGRAY)
                         setTextColor(Color.WHITE)
                         show()
-                    }.setAction("undo") {
+                    }.setAction(UNDO) {
                         viewModel.saveSkiPlace(place)
                     }
                 }

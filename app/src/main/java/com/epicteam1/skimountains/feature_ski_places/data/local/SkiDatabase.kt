@@ -8,7 +8,7 @@ import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 
 @Database(
     entities = [SkiPlace::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class SkiDatabase : RoomDatabase() {

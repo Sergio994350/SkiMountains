@@ -13,7 +13,10 @@ import kotlinx.coroutines.launch
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    lateinit var viewModel: SkiViewModel
+    companion object {
+        var startCount = 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -21,7 +24,8 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(1300L)
+            delay(1600L)
+            startCount++
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }
