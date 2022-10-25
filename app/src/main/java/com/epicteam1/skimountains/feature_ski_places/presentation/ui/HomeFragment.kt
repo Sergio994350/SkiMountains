@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epicteam1.skimountains.MainActivity
 import com.epicteam1.skimountains.R
-import com.epicteam1.skimountains.SplashActivity.Companion.startCount
 import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.DETAILS
 import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SKI_PLACE_SAVED
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SkiPlacesAdapter
+import com.epicteam1.skimountains.feature_ski_places.presentation.ui.SplashFragment.Companion.startCount
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar

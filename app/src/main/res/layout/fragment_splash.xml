@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_variant"
-    tools:context=".SplashActivity">
+    tools:context=".feature_ski_places.presentation.ui.SplashFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="@dimen/_240sdp"
