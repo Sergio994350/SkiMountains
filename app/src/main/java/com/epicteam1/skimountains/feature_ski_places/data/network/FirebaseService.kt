@@ -1,6 +1,6 @@
 package com.epicteam1.skimountains.feature_ski_places.data.network
 
-import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.google.firebase.firestore.FirebaseFirestore
 
 interface FirebaseService {

@@ -1,8 +1,13 @@
-package com.epicteam1.skimountains.feature_ski_places.domain.model
+package com.epicteam1.skimountains.feature_ski_places.data.local.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
-data class SkiPlace(
+@Entity(tableName = "ski_place_table")
+data class SkiPlaceEntity (
+
+    @PrimaryKey(autoGenerate = false)
     val skiPlaceId: String = "",
     val blackTrails: String = "",
     val blueTrails: String = "",
@@ -37,4 +42,3 @@ data class SkiPlace(
     val entity: String = "",
     var isSaved: String = "",
 ) : Serializable
-
