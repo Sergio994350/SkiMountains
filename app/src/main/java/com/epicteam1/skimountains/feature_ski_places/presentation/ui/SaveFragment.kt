@@ -2,44 +2,45 @@ package com.epicteam1.skimountains.feature_ski_places.presentation.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.epicteam1.skimountains.MainActivity
 import com.epicteam1.skimountains.R
-import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.DETAILS
-import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.SKI_PLACE_DELETED
-import com.epicteam1.skimountains.feature_ski_places.domain.util.Constants.UNDO
+import com.epicteam1.skimountains.databinding.FragmentSaveBinding
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.DETAILS
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_DELETED
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.UNDO
+import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SaveAdapter
-import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiViewModel
+import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_save.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SaveFragment : Fragment(R.layout.fragment_save) {
 
-    lateinit var viewModel: SkiViewModel
-    lateinit var saveAdapter: SaveAdapter
+    private lateinit var binding: FragmentSaveBinding
+    private lateinit var saveAdapter: SaveAdapter
+    private val viewModel by viewModel<SkiPlaceViewModel>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentSaveBinding.inflate(inflater)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (activity as MainActivity).viewModel
-        setupRecyclerView()
+        setAdapter()
+        setObservers()
 
-        viewModel.getAllSkiPlacesSaved().observe(viewLifecycleOwner, Observer { it ->
-            saveAdapter.differ.submitList(it)
-        })
-        saveAdapter.setOnItemClickListener { Place ->
-            val bundle = Bundle().apply {
-                putSerializable(DETAILS, Place)
-            }
-            findNavController().navigate(R.id.action_saveSkiPlace_to_details, bundle)
-        }
+        saveAdapter.setOnItemClickListener { skiPlace -> onSkiPlaceClick(skiPlace) }
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
@@ -74,11 +75,21 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         }
     }
 
-    private fun setupRecyclerView() {
-        saveAdapter = SaveAdapter()
-        save_recycler_view.apply {
-            adapter = saveAdapter
-            layoutManager = LinearLayoutManager(context)
+    private fun onSkiPlaceClick(skiPlace: SkiPlace) {
+        val bundle = Bundle().apply {
+            putSerializable(DETAILS, skiPlace)
         }
+        findNavController().navigate(R.id.action_saveSkiPlace_to_details, bundle)
+    }
+    private fun setObservers() {
+        viewModel.skiSavedPlacesListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesSavedList)
+    }
+    private fun updateSkiPlacesSavedList(skiPlaces: List<SkiPlace>) {
+        saveAdapter.differ.submitList(skiPlaces)
+    }
+    private fun setAdapter() {
+        saveAdapter = SaveAdapter()
+        binding.saveRecyclerView.adapter = saveAdapter
+        binding.saveRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 }

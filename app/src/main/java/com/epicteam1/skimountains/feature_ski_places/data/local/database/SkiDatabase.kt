@@ -1,13 +1,15 @@
-package com.epicteam1.skimountains.feature_ski_places.data.local
+package com.epicteam1.skimountains.feature_ski_places.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
+import com.epicteam1.skimountains.feature_ski_places.data.local.dao.SkiDao
+import com.epicteam1.skimountains.feature_ski_places.data.local.entities.SkiPlaceEntity
 
 @Database(
-    entities = [SkiPlace::class],
+    entities = [SkiPlaceEntity::class],
     version = 3,
     exportSchema = false
 )
@@ -25,7 +27,7 @@ abstract class SkiDatabase : RoomDatabase() {
         private fun createDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext, SkiDatabase::class.java,
-                "ski_place_local_db.db"
+                Constants.LOCAL_DATABASE_NAME
             ).allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build()

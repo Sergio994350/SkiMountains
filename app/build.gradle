@@ -25,6 +25,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,9 +50,10 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation platform('com.google.firebase:firebase-bom:30.5.0')
-    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.0'
     implementation 'com.google.firebase:firebase-database:20.0.6'
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
     // Glide and Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -87,5 +91,11 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:3.6.1'
+
+    //koin
+    implementation "io.insert-koin:koin-android:3.3.0"
+    implementation "io.insert-koin:koin-android-compat:3.3.0"
+    implementation "io.insert-koin:koin-core:3.2.2"
+    implementation "io.insert-koin:koin-android-ext:3.0.2"
 
 }

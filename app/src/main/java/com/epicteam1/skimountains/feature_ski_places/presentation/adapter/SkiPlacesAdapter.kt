@@ -41,7 +41,7 @@ class SkiPlacesAdapter : RecyclerView.Adapter<SkiPlacesAdapter.ViewHolder>() {
             Glide.with(this).load(place.mainPic).into(image_view_item_ski_place)
             name_ski_place.text = "${place.nameRus} ${place.regionRus}"
             card_save.setOnClickListener {
-                onItemClickListener2?.let { it(place) }
+                onItemSaveClickListener?.let { it(place) }
                 card_save.setCardBackgroundColor(Color.WHITE);
             }
             setOnClickListener {
@@ -55,13 +55,13 @@ class SkiPlacesAdapter : RecyclerView.Adapter<SkiPlacesAdapter.ViewHolder>() {
     }
 
     private var onItemClickListener: ((SkiPlace) -> Unit)? = null
-    private var onItemClickListener2: ((SkiPlace) -> Unit)? = null
+    private var onItemSaveClickListener: ((SkiPlace) -> Unit)? = null
     fun setOnItemClickListener(listener: (SkiPlace) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun setOnItemClickListener2(listener: (SkiPlace) -> Unit) {
-        onItemClickListener2 = listener
+    fun setOnItemSaveClickListener(listener: (SkiPlace) -> Unit) {
+        onItemSaveClickListener = listener
     }
 
 }
