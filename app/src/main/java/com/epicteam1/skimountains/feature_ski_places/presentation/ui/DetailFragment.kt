@@ -21,7 +21,6 @@ import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiP
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.item_save_ski_place.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -46,6 +45,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             findNavController().navigate(R.id.action_details_to_home2)
         }
 
+        btn_how_to_get_details.setOnClickListener {
+            findNavController().navigate(R.id.action_details_to_how_to_get_fragment)
+        }
+
         card_view_save_ski_place_details.setOnClickListener {
             Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
@@ -64,8 +67,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         Glide.with(this).load(skiPlace.mainPic).into(binding.imageSkiPlaceBigDetails)
         binding.nameSkiPlaceDetails.text = skiPlace.nameRus
         binding.regionCategoryDetails.text = skiPlace.regionRus
-        binding.webCiteDetails.text = skiPlace.webCite
-        binding.webCamerasDetails.text = skiPlace.webCamera
         binding.technicalDataDetails.text = skiPlace.getTechnicalDataRus()
         binding.descriptionDataDetails.text = skiPlace.getDescriptionDataRus()
         binding.geoDataDetails.text = skiPlace.getGeoDataRus()

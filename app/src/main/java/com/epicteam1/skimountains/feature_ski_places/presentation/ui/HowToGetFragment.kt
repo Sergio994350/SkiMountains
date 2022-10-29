@@ -5,7 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.epicteam1.skimountains.R
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class HowToGetFragment : Fragment(R.layout.fragment_howtoget) {
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -19,7 +19,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         super.onCreate(savedInstanceState)
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(1600L)
+            delay(2000L)
             startCount++
             findNavController().navigate(R.id.action_splash_to_home_fragment)
         }

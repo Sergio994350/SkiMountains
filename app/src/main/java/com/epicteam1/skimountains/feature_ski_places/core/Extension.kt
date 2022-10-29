@@ -112,17 +112,16 @@ fun SkiPlace.toSkiPlaceEntity() = SkiPlaceEntity(
     isSaved = isSaved
 )
 
-fun SkiPlace.getTechnicalDataRus() = "Перепад высот: ${heightDiff}м, максимальная высота: $maxHeight м,\n" +
-        "        общая длина трасс: $sumTrailsLength км, максимальная длина одной трассы: $maxLengthTrail км,\n" +
-        "        Трассы: зеленых: $greenTrails, синих: $blueTrails, красных: $redTrails, черных: $blueTrails"
-fun SkiPlace.getGeoDataRus() = "Города рядом: $citiesNearby.\n" +
-        "        Координаты: широта $latitude, долгота: $longitude"
+fun SkiPlace.getTechnicalDataRus() = "Перепад высот: ${heightDiff}м, максимальная высота: ${maxHeight}м, " +
+        "общая длина трасс: ${sumTrailsLength}км, макс. длина одной трассы: ${maxLengthTrail}км.\n" +
+        "Трассы - зеленые: $greenTrails, синие: $blueTrails, красные: $redTrails, черные: $blackTrails"
+
+fun SkiPlace.getGeoDataRus() = "Города рядом: $citiesNearby.\nКоординаты: $latitude, $longitude"
 
 fun SkiPlace.getDescriptionDataRus() : String {
-
     val railwayAvailSymb =  if (railwayAvail=="true") "☑" else "☐"
     val nightRideSymb =  if (nightRide=="true") "☑" else "☐"
-    return "Подъемники бугельные: $towLifts , кресельные: $chairLifts, кабины: $cabinLifts.\n" +
-            "        Начало сезона: $seasonDateBegin, конец сезона: $seasonDateEnd.\n" +
-            "        Ж/д станция рядом: $railwayAvailSymb, ночное катание: $nightRideSymb"
+    return "Подъемники бугельные: $towLifts , кресельные: $chairLifts, кабины: $cabinLifts." +
+            " Начало сезона: $seasonDateBegin, конец сезона: $seasonDateEnd.\n" +
+            "Ж/д станция рядом: $railwayAvailSymb, ночное катание: $nightRideSymb"
 }

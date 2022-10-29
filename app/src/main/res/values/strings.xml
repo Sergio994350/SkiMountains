@@ -10,25 +10,23 @@
     <string name="ural">Урал</string>
     <string name="popular_places">Популярные места</string>
     <string name="subtitle_main_rv">Популярные места</string>
-    <string name="abzakovo">Абзаково, Башкортостан (Урал)</string>
+    <string name="abzakovo">Абзаково, Башкортостан</string>
     <string name="search_ski_place">Поиск курорта</string>
     <string name="saved_ski_places">Сохраненные курорты</string>
     <string name="abzakovo_web_cite">https://abzakovo.com</string>
     <string name="abzakovo_web_cameras">https://abzakovo.com/glc/camera/</string>
-    <string name="technical_data">Перепад высот: 320м, максимальная высота: 819 м,
-        общая длина трасс: 16.0 км, максимальная длина одной трассы: 2.8 км,
-        Трассы: зеленых: 7, синих: 5, красных: 2, черных: 0</string>
-    <string name="description_data">Подъемники бугельные: 6 , кресельныеЖ 2, кабины: 0.
-        Начало сезона: 02/11, конец сезона: 10/04.
-        Ж/д станция рядом: ☑, ночное катание: ☑</string>
-    <string name="geo_data">Города рядом: Белорецк (27), Магнитогорск (60), Верхнеуральск (78).
-        Координаты: широта 53.796257, долгота: 58.622145</string>
-
+    <string name="web_camera">Web-camera</string>
+    <string name="technical_data">Перепад высот: 320м, максимальная высота: 819 м, общая длина трасс: 16.0 км, максимальная длина одной трассы: 2.8 км, Трассы: зеленые: 7, синие: 5, красные: 2, черные: 0</string>
+    <string name="description_data">Подъемники бугельные: 6, кресельные: 2, кабины: 0. Начало сезона: 02/11, конец сезона: 10/04. Ж/д станция рядом: ☑, ночное катание: ☑</string>
+    <string name="geo_data">Города рядом: Белорецк (27), Магнитогорск (60), Верхнеуральск (78). Координаты: широта 53.796257, долгота: 58.622145</string>
+    <string name="how_to_get_title">Как добраться:</string>
+    <string name="how_to_get_abzakovo">Оздоровительно-спортивный комплекс Абзаково расположен в отрогах Уральских гор на юго-востоке Башкирии. Добраться до Абзаково не сложно. Для начала необходимо доехать до города Магнитогорск, это можно сделать на поезде (крупные железнодорожные узлы расположены в Магнитогорске и Белорецке, в Новоабзаково есть железнодорожная станция) или на самолёте (аэропорт Магнитогорска находится примерно в 60 км от Абзаково). Кроме Магнитогорска в радиусе 600 км. от Абзаково расположены города Белорецк (27 км), Уфа (290 км), Челябинск (370 км), Иркутск (580 км).</string>
     <string name="see_video_on_youtube">See video on YouTube</string>
     <string name="galochka_v_kvadrate">☑</string>
     <string name="krestik_v_kvadrate">☒</string>
     <string name="okruzhnost">●</string>
     <string name="ski_places_app">Ski Places App</string>
     <string name="version_1_0">Version 1.0</string>
-
+    <string name="my_profile">My Profile</string>
+    <string name="web_cite">Web-cite</string>
 </resources>

@@ -93,8 +93,8 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.6.1'
 
     //koin
-    implementation "io.insert-koin:koin-android:3.3.0"
-    implementation "io.insert-koin:koin-android-compat:3.3.0"
+    implementation "io.insert-koin:koin-android:3.2.3"
+    implementation "io.insert-koin:koin-android-compat:3.2.3"
     implementation "io.insert-koin:koin-core:3.2.2"
     implementation "io.insert-koin:koin-android-ext:3.0.2"
 
