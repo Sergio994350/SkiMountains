@@ -6,23 +6,20 @@ import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.toSkiPlace
 import com.epicteam1.skimountains.feature_ski_places.core.toSkiPlaceEntity
+import com.epicteam1.skimountains.feature_ski_places.data.network.FirebaseDataSource
 import com.epicteam1.skimountains.feature_ski_places.domain.repository.SkiPlaceRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 class SkiPlaceRepositoryImpl(
     private val skiDatabase: SkiDatabase,
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseDataSource: FirebaseDataSource,
 ) : SkiPlaceRepository {
     private val tag = "ski_place_firebase"
 
     override suspend fun getInitAllSkiPlacesFirebase() {
         skiDatabase.getSkiDao().deleteAllRecords()
-        val skiPlaces = firebaseFirestore
-            .collection(Constants.FIREBASE_COLLECTION_NAME)
-            .get()
-            .await()
-            .documents
+        val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)
             .map { it.toSkiPlace() }
 
         for (skiPlace in skiPlaces) {
@@ -54,13 +51,7 @@ class SkiPlaceRepositoryImpl(
     }
 
     override suspend fun getSkiPlaceById(skiPlaceId: String) =
-        firebaseFirestore
-            .collection(Constants.FIREBASE_COLLECTION_NAME)
-            .document(skiPlaceId)
-            .get()
-            .await()
-            .toSkiPlace()
-
+        skiDatabase.getSkiDao().getSkiPlaceById(skiPlaceId).toSkiPlace()
 
     // database
     override suspend fun upsert(skiPlace: SkiPlace) = skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())

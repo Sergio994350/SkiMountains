@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -45,7 +46,6 @@ class SkiPlaceViewModel(
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
 
-
     // search from home fragment - TODO
     fun getSearchFb(search: String) = viewModelScope.launch {
         getSearchFirebaseUseCase.execute(search)
@@ -61,9 +61,12 @@ class SkiPlaceViewModel(
     }
 
     // detail fragment - TODO
-    fun getDetails(id: String) = viewModelScope.launch {
+    fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            getSkiPlaceDetailsUseCase.execute(id)
+            val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
+            withContext(Dispatchers.Main) {
+                _skiPlaceDetailLoaded.value = skiPlaceDetails
+            }
         }
     }
 
@@ -99,14 +102,12 @@ class SkiPlaceViewModel(
         }
     }
 
-
     private suspend fun getSkiPlaces() {
         val skiPlaces = getAllSkiPlacesUseCase.execute()
         withContext(Dispatchers.Main) {
             _skiPlacesListLoaded.value = skiPlaces
         }
     }
-
 
     // function for checking internet connection for API>=23 and <23
     private fun hasInternetConnection(): Boolean {

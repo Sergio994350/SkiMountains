@@ -56,7 +56,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onSkiPlaceClick(skiPlace: SkiPlace) {
         val bundle = Bundle().apply {
-            putSerializable(DETAILS, skiPlace)
+            putSerializable(DETAILS, skiPlace.skiPlaceId)
         }
         findNavController().navigate(R.id.action_home2_to_details, bundle)
     }

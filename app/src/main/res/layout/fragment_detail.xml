@@ -21,7 +21,6 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
-
             <ImageView
                 android:id="@+id/image_ski_place_big_details"
                 android:layout_width="match_parent"
@@ -87,6 +86,7 @@
                 android:text="@string/abzakovo_web_cite"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/_14ssp"
+                android:autoLink="web"
                 app:layout_constraintLeft_toLeftOf="@+id/region_category_details"
                 app:layout_constraintTop_toBottomOf="@+id/region_category_details" />
 
@@ -100,6 +100,7 @@
                 android:text="@string/abzakovo_web_cameras"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/_14ssp"
+                android:autoLink="web"
                 app:layout_constraintLeft_toLeftOf="@+id/web_cite_details"
                 app:layout_constraintTop_toBottomOf="@+id/web_cite_details" />
 

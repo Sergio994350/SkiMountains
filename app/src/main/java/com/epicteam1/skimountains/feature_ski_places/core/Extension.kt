@@ -111,3 +111,18 @@ fun SkiPlace.toSkiPlaceEntity() = SkiPlaceEntity(
     entity = entity,
     isSaved = isSaved
 )
+
+fun SkiPlace.getTechnicalDataRus() = "Перепад высот: ${heightDiff}м, максимальная высота: $maxHeight м,\n" +
+        "        общая длина трасс: $sumTrailsLength км, максимальная длина одной трассы: $maxLengthTrail км,\n" +
+        "        Трассы: зеленых: $greenTrails, синих: $blueTrails, красных: $redTrails, черных: $blueTrails"
+fun SkiPlace.getGeoDataRus() = "Города рядом: $citiesNearby.\n" +
+        "        Координаты: широта $latitude, долгота: $longitude"
+
+fun SkiPlace.getDescriptionDataRus() : String {
+
+    val railwayAvailSymb =  if (railwayAvail=="true") "☑" else "☐"
+    val nightRideSymb =  if (nightRide=="true") "☑" else "☐"
+    return "Подъемники бугельные: $towLifts , кресельные: $chairLifts, кабины: $cabinLifts.\n" +
+            "        Начало сезона: $seasonDateBegin, конец сезона: $seasonDateEnd.\n" +
+            "        Ж/д станция рядом: $railwayAvailSymb, ночное катание: $nightRideSymb"
+}
