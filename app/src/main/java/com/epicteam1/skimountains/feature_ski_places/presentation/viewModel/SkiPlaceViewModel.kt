@@ -46,7 +46,6 @@ class SkiPlaceViewModel(
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
 
-    // search from home fragment - TODO
     fun getSearchFb(search: String) = viewModelScope.launch {
         getSearchFirebaseUseCase.execute(search)
     }
@@ -60,7 +59,6 @@ class SkiPlaceViewModel(
         }
     }
 
-    // detail fragment - TODO
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
@@ -70,7 +68,6 @@ class SkiPlaceViewModel(
         }
     }
 
-    // save fragment
     fun saveSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             saveSkiPlacesUseCase.execute(skiPlace)
@@ -85,7 +82,10 @@ class SkiPlaceViewModel(
 
     fun getAllSkiPlacesSaved() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            getSavedSkiPlacesUseCase.execute()
+            val skiPlacesSaved = getSavedSkiPlacesUseCase.execute()
+            withContext(Dispatchers.Main) {
+                _skiSavedPlacesListLoaded.value = skiPlacesSaved
+            }
         }
     }
 
@@ -95,7 +95,6 @@ class SkiPlaceViewModel(
         }
     }
 
-    // save fragment - TODO
     fun saveSkiPlaceSaved(skiPlace: SkiPlace) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             upsertUseCase.execute(skiPlace)
@@ -109,7 +108,6 @@ class SkiPlaceViewModel(
         }
     }
 
-    // function for checking internet connection for API>=23 and <23
     private fun hasInternetConnection(): Boolean {
         val connectivityManager = getApplication<SkiApp>()
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

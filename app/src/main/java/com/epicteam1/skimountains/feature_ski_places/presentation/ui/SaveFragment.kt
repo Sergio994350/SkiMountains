@@ -27,7 +27,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
 
     private lateinit var binding: FragmentSaveBinding
     private lateinit var saveAdapter: SaveAdapter
-    private val viewModel by viewModel<SkiPlaceViewModel>()
+    private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSaveBinding.inflate(inflater)
@@ -58,14 +58,14 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
                 val position = viewHolder.adapterPosition
                 val place = saveAdapter.differ.currentList[position]
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    viewModel.deleteSkiPlace(place)
+                    skiPlaceViewModel.deleteSkiPlace(place)
                     Snackbar.make(view, SKI_PLACE_DELETED, Snackbar.LENGTH_LONG).apply {
                         animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                         setBackgroundTint(Color.DKGRAY)
                         setTextColor(Color.WHITE)
                         show()
                     }.setAction(UNDO) {
-                        viewModel.saveSkiPlace(place)
+                        skiPlaceViewModel.saveSkiPlace(place)
                     }
                 }
             }
@@ -73,6 +73,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(save_recycler_view)
         }
+        skiPlaceViewModel.getAllSkiPlacesSaved()
     }
 
     private fun onSkiPlaceClick(skiPlace: SkiPlace) {
@@ -82,7 +83,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         findNavController().navigate(R.id.action_saveSkiPlace_to_details, bundle)
     }
     private fun setObservers() {
-        viewModel.skiSavedPlacesListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesSavedList)
+        skiPlaceViewModel.skiSavedPlacesListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesSavedList)
     }
     private fun updateSkiPlacesSavedList(skiPlaces: List<SkiPlace>) {
         saveAdapter.differ.submitList(skiPlaces)

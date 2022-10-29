@@ -40,7 +40,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val skiPlaceArg: String = arguments?.getString(Constants.DETAILS)!!
 
         setObservers()
+        setOnClickListeners(view)
         skiPlaceViewModel.getSkiPlaceDetailsById(skiPlaceArg)
+
+    }
+
+    private fun setObservers() {
+        skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
+    }
+
+    private fun setOnClickListeners(view: View) {
         card_view_back.setOnClickListener {
             findNavController().navigate(R.id.action_details_to_home2)
         }
@@ -57,10 +66,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 show()
             }
         }
-    }
-
-    private fun setObservers() {
-        skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
     }
 
     private fun setSkiPlaceData(skiPlace: SkiPlace) {

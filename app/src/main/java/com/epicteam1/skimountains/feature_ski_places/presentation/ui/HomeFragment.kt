@@ -38,12 +38,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
-
         initDatabase()
         setObservers()
 
-        skiPlacesAdapter.setOnItemClickListener { skiPlace -> onSkiPlaceClick(skiPlace) }
-        skiPlacesAdapter.setOnItemSaveClickListener { skiPlace -> onSkiPlaceSaveClick(skiPlace) }
     }
 
     private fun setObservers() {
@@ -75,6 +72,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setAdapter() {
         skiPlacesAdapter = SkiPlacesAdapter()
+        skiPlacesAdapter.setOnItemClickListener { skiPlace -> onSkiPlaceClick(skiPlace) }
+        skiPlacesAdapter.setOnItemSaveClickListener { skiPlace -> onSkiPlaceSaveClick(skiPlace) }
         binding.rvSkiPlaces.adapter = skiPlacesAdapter
         binding.rvSkiPlaces.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
