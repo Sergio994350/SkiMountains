@@ -33,7 +33,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSaveBinding.inflate(inflater)
         return binding.root
     }
@@ -70,6 +70,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
                         show()
                     }.setAction(UNDO) {
                         skiPlaceViewModel.saveSkiPlace(place)
+                        skiPlaceViewModel.getAllSkiPlacesSaved()
                     }
                 }
             }
@@ -82,7 +83,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
 
     private fun onSkiPlaceClick(skiPlace: SkiPlace) {
         val bundle = Bundle().apply {
-            putSerializable(DETAILS, skiPlace)
+            putSerializable(DETAILS, skiPlace.skiPlaceId)
         }
         findNavController().navigate(R.id.action_saveSkiPlace_to_details, bundle)
     }
