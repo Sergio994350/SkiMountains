@@ -28,7 +28,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private lateinit var binding: FragmentDetailBinding
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentDetailBinding.inflate(inflater)
         return binding.root
     }
@@ -51,7 +55,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun setOnClickListeners(view: View) {
         card_view_back.setOnClickListener {
-            findNavController().navigate(R.id.action_details_to_home2)
+            findNavController().apply { popBackStack() }
         }
 
         btn_how_to_get_details.setOnClickListener {

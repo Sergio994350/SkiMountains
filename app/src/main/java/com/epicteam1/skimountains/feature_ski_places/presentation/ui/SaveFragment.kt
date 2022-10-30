@@ -44,7 +44,9 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         setAdapter()
         setObservers()
 
-        saveAdapter.setOnItemClickListener { skiPlace -> onSkiPlaceClick(skiPlace) }
+        saveAdapter.setOnItemClickListener {
+                skiPlace -> onSkiPlaceClick(skiPlace)
+        }
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
