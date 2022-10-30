@@ -28,7 +28,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var skiPlacesAdapter: SkiPlacesAdapter
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
@@ -38,7 +42,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
-        initDatabase()
+        if (startCount <= 1) {
+            initDatabase()
+        }
         setObservers()
 
     }
@@ -75,7 +81,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         skiPlacesAdapter.setOnItemClickListener { skiPlace -> onSkiPlaceClick(skiPlace) }
         skiPlacesAdapter.setOnItemSaveClickListener { skiPlace -> onSkiPlaceSaveClick(skiPlace) }
         binding.rvSkiPlaces.adapter = skiPlacesAdapter
-        binding.rvSkiPlaces.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvSkiPlaces.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun initDatabase() {

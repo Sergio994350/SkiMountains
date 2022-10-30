@@ -29,7 +29,11 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
     private lateinit var saveAdapter: SaveAdapter
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSaveBinding.inflate(inflater)
         return binding.root
     }
@@ -82,12 +86,18 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         }
         findNavController().navigate(R.id.action_saveSkiPlace_to_details, bundle)
     }
+
     private fun setObservers() {
-        skiPlaceViewModel.skiSavedPlacesListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesSavedList)
+        skiPlaceViewModel.skiSavedPlacesListLoaded.observe(
+            viewLifecycleOwner,
+            ::updateSkiPlacesSavedList
+        )
     }
+
     private fun updateSkiPlacesSavedList(skiPlaces: List<SkiPlace>) {
         saveAdapter.differ.submitList(skiPlaces)
     }
+
     private fun setAdapter() {
         saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter

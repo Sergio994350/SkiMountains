@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_item_ski_place"
         android:layout_width="@dimen/_280sdp"
-        android:layout_height="@dimen/_190sdp"
+        android:layout_height="@dimen/_150sdp"
         app:cardCornerRadius="@dimen/_18sdp"
         app:cardElevation="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,8 +43,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_save"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_27sdp"
+                android:layout_height="@dimen/_27sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:backgroundTint="@color/light_grey"
