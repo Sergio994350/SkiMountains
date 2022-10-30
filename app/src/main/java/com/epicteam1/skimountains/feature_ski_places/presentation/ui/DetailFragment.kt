@@ -28,7 +28,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private lateinit var binding: FragmentDetailBinding
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDetailBinding.inflate(inflater)
         return binding.root
     }
@@ -72,8 +72,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         Glide.with(this).load(skiPlace.mainPic).into(binding.imageSkiPlaceBigDetails)
         binding.nameSkiPlaceDetails.text = skiPlace.nameRus
         binding.regionCategoryDetails.text = skiPlace.regionRus
-        binding.technicalDataDetails.text = skiPlace.getTechnicalDataRus()
-        binding.descriptionDataDetails.text = skiPlace.getDescriptionDataRus()
-        binding.geoDataDetails.text = skiPlace.getGeoDataRus()
+        binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
+        binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
+        binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
     }
 }

@@ -1,5 +1,7 @@
 package com.epicteam1.skimountains.feature_ski_places.core
 
+import android.content.Context
+import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.feature_ski_places.data.local.entities.SkiPlaceEntity
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.google.firebase.firestore.DocumentSnapshot
@@ -112,16 +114,15 @@ fun SkiPlace.toSkiPlaceEntity() = SkiPlaceEntity(
     isSaved = isSaved
 )
 
-fun SkiPlace.getTechnicalDataRus() = "Перепад высот: ${heightDiff}м, максимальная высота: ${maxHeight}м, " +
-        "общая длина трасс: ${sumTrailsLength}км, макс. длина одной трассы: ${maxLengthTrail}км.\n" +
-        "Трассы - зеленые: $greenTrails, синие: $blueTrails, красные: $redTrails, черные: $blackTrails"
+fun SkiPlace.getTechnicalDataRus(context: Context) = context.getString(R.string.technical_data,
+    heightDiff, maxHeight, sumTrailsLength, maxLengthTrail, greenTrails, blueTrails, redTrails, blackTrails)
 
-fun SkiPlace.getGeoDataRus() = "Города рядом: $citiesNearby.\nКоординаты: $latitude, $longitude"
+fun SkiPlace.getGeoDataRus(context: Context) =  context.getString(R.string.geo_data, citiesNearby, latitude, longitude)
 
-fun SkiPlace.getDescriptionDataRus() : String {
+fun SkiPlace.getDescriptionDataRus(context: Context) : String {
     val railwayAvailSymb =  if (railwayAvail=="true") "☑" else "☐"
     val nightRideSymb =  if (nightRide=="true") "☑" else "☐"
-    return "Подъемники бугельные: $towLifts , кресельные: $chairLifts, кабины: $cabinLifts." +
-            " Начало сезона: $seasonDateBegin, конец сезона: $seasonDateEnd.\n" +
-            "Ж/д станция рядом: $railwayAvailSymb, ночное катание: $nightRideSymb"
+
+    return context.getString(R.string.description_data, towLifts, chairLifts,
+        cabinLifts, seasonDateBegin, seasonDateEnd, railwayAvailSymb, nightRideSymb)
 }

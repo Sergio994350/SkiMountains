@@ -32,7 +32,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
@@ -42,11 +42,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
+        setObservers()
         if (startCount <= 1) {
             initDatabase()
+        } else {
+            loadSkiPlaceList()
         }
-        setObservers()
-
     }
 
     private fun setObservers() {
@@ -88,5 +89,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun initDatabase() {
         startCount++
         skiPlaceViewModel.getAllSkiPlacesFb()
+    }
+
+    private fun loadSkiPlaceList() {
+        skiPlaceViewModel.getAllSkiPlaces()
     }
 }
