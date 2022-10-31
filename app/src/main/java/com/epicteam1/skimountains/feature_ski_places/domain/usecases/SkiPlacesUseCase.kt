@@ -8,7 +8,6 @@ interface SkiPlacesUseCase {
     suspend fun getSkiPlaceDetails(skiPlaceId: String): SkiPlace
     suspend fun deleteSkiPlace(skiPlace: SkiPlace)
     suspend fun saveSkiPlace(skiPlace: SkiPlace)
-    suspend fun getInitAllSkiPlacesFirebase()
-    suspend fun getSearchFirebase(search: String)
+    suspend fun getFilteredSkiPlacesUseCase(filterString: String): List<SkiPlace>
     suspend fun upsert(skiPlace: SkiPlace)
 }

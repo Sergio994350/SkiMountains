@@ -16,9 +16,7 @@ class SkiPlacesUseCaseImpl(private val skiPlaceRepository: SkiPlaceRepository) :
 
     override suspend fun saveSkiPlace(skiPlace: SkiPlace) = skiPlaceRepository.saveSkiPlace(skiPlace = skiPlace)
 
-    override suspend fun getInitAllSkiPlacesFirebase() = skiPlaceRepository.getInitAllSkiPlacesFirebase()
-
-    override suspend fun getSearchFirebase(search: String) = skiPlaceRepository.getSearchFirebase(search = search)
+    override suspend fun getFilteredSkiPlacesUseCase(filterString: String) = skiPlaceRepository.getFilteredSkiPlaces(filterString = filterString)
 
     override suspend fun upsert(skiPlace: SkiPlace) = skiPlaceRepository.upsert(skiPlace = skiPlace)
 }

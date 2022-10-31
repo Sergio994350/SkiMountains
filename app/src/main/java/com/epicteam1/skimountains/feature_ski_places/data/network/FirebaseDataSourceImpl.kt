@@ -10,4 +10,5 @@ class FirebaseDataSourceImpl(private val firebaseFirestore: FirebaseFirestore) :
 
     override suspend fun getDocument(collectionName: String, documentId: String): DocumentSnapshot =
         firebaseFirestore.collection(collectionName).document(documentId).get().await()
+
 }
