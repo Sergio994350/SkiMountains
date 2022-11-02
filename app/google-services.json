@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "416739455995",
+    "project_id": "skimountains-81fdc",
+    "storage_bucket": "skimountains-81fdc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416739455995:android:c50e9d40c3ffd35c65515e",
+        "android_client_info": {
+          "package_name": "com.epicteam1.skimountains"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416739455995-e6insdun8tjhl9h0g6gh9rub5n4lejob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicteam1.skimountains",
+            "certificate_hash": "72e31d2e2a8154c3d778f752fe81aafab43685e1"
+          }
+        },
+        {
+          "client_id": "416739455995-ksievplcvkpjooqlnhhie829dbpeb173.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7FS8e7BxGQpLhL2n4N_xTkkEt-m7etro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416739455995-ksievplcvkpjooqlnhhie829dbpeb173.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
