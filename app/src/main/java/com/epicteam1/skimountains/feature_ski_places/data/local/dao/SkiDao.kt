@@ -12,24 +12,21 @@ import com.epicteam1.skimountains.feature_ski_places.data.local.entities.SkiPlac
 interface SkiDao {
 
     @Query("SELECT * FROM ski_place_table")
-    suspend fun getAllSkiPlaces(): List<SkiPlaceEntity>
+    fun getAllSkiPlaces(): List<SkiPlaceEntity>
 
     @Query("SELECT * FROM ski_place_table WHERE skiPlaceId = :skiPlaceEntityId")
-    suspend fun getSkiPlaceById(skiPlaceEntityId: String): SkiPlaceEntity
+    fun getSkiPlaceById(skiPlaceEntityId: String): SkiPlaceEntity
 
     @Query("SELECT * FROM ski_place_table WHERE isSaved = $SAVED")
-    suspend fun getSkiPlacesSavedList(): List<SkiPlaceEntity>
+    fun getSkiPlacesSavedList(): List<SkiPlaceEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(skiPlaceEntity: SkiPlaceEntity)
+    fun upsert(skiPlaceEntity: SkiPlaceEntity)
 
     @Delete
-    suspend fun deleteSkiPlace(skiPlaceEntity: SkiPlaceEntity)
+    fun deleteSkiPlace(skiPlaceEntity: SkiPlaceEntity)
 
     @Query("DELETE FROM ski_place_table")
-    suspend fun deleteAllRecords()
-
-    @Query("SELECT * FROM ski_place_table WHERE nameRus = :filter OR nameEng = :filter OR regionRus = :filter OR regionEng = :filter OR regionBig = :filter")
-    suspend fun getFilteredCollection(filter: String): List<SkiPlaceEntity>
+    fun deleteAllRecords()
 
 }

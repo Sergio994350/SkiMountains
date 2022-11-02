@@ -1,9 +1,7 @@
 package com.epicteam1.skimountains.feature_ski_places.presentation.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +32,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailBinding.inflate(inflater)
         return binding.root
     }
@@ -81,14 +79,5 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
         binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
         binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
-        btn_play_youtube_details.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.youTubeLink)))
-        }
-        btn_web_cite_details.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCite)))
-        }
-        btn_web_camera_details.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
-        }
     }
 }

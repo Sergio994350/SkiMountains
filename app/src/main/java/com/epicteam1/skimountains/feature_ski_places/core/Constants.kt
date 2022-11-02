@@ -14,8 +14,6 @@ object Constants {
     const val SKI_PLACE_DELETED = "Ski Place Deleted"
     const val SKI_PLACE_SAVED = "Ski Place Saved"
     const val UNDO = "undo"
-    const val HAS_NIGHTRIDE = "true"
-    const val HAS_RAILWAY = "true"
 
     const val SKIPLACE_ID = "skiPlaceId"
     const val SKIPLACE_BLACKTRAILS = "blackTrails"

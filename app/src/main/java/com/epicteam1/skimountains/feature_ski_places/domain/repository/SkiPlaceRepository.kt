@@ -4,7 +4,9 @@ import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 
 interface SkiPlaceRepository {
 
-    suspend fun getFilteredSkiPlaces(filterString: String): List<SkiPlace>
+    suspend fun getInitAllSkiPlacesFirebase()
+
+    suspend fun getSearchFirebase(search: String)
 
     suspend fun getSkiPlaceById(skiPlaceId: String): SkiPlace
 
@@ -18,5 +20,4 @@ interface SkiPlaceRepository {
 
     suspend fun deleteSkiPlace(skiPlace: SkiPlace)
 
-    suspend fun updateSkiPlacesFromFirebase(): List<SkiPlace>
 }

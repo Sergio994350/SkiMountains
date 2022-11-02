@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,10 +14,12 @@ import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetAllSkiPlacesUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetInitAllSkiPlacesFirebaseUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetFilteredSkiPlacesUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSearchFirebaseUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlaceDetailsUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,8 +29,9 @@ class SkiPlaceViewModel(
     app: Application,
     private val deleteSkiPlaceUseCase: DeleteSkiPlaceUseCase,
     private val getAllSkiPlacesUseCase: GetAllSkiPlacesUseCase,
+    private val getInitAllSkiPlacesFirebaseUseCase: GetInitAllSkiPlacesFirebaseUseCase,
     private val getSavedSkiPlacesUseCase: GetSavedSkiPlacesUseCase,
-    private val GetFilteredSkiPlacesUseCase: GetFilteredSkiPlacesUseCase,
+    private val getSearchFirebaseUseCase: GetSearchFirebaseUseCase,
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
     private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
     private val upsertUseCase: UpsertUseCase
@@ -42,8 +46,17 @@ class SkiPlaceViewModel(
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
 
-    fun getFilteredSkiPlacesList(filterString: String) = viewModelScope.launch {
-        GetFilteredSkiPlacesUseCase.execute(filterString = filterString)
+    fun getSearchFb(search: String) = viewModelScope.launch {
+        getSearchFirebaseUseCase.execute(search)
+    }
+
+    fun getAllSkiPlacesFb() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                getInitAllSkiPlacesFirebaseUseCase.execute()
+                getSkiPlaces()
+            }
+        }
     }
 
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
