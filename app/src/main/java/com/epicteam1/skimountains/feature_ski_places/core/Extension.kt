@@ -119,10 +119,15 @@ fun SkiPlace.getTechnicalDataRus(context: Context) = context.getString(R.string.
 
 fun SkiPlace.getGeoDataRus(context: Context) =  context.getString(R.string.geo_data, citiesNearby, latitude, longitude)
 
+fun SkiPlace.hasNightRide() = nightRide == Constants.HAS_NIGHTRIDE
+
+fun SkiPlace.hasRailWay() = railwayAvail == Constants.HAS_RAILWAY
+
 fun SkiPlace.getDescriptionDataRus(context: Context) : String {
-    val railwayAvailSymb =  if (railwayAvail=="true") "☑" else "☐"
-    val nightRideSymb =  if (nightRide=="true") "☑" else "☐"
+    val railwayAvailSymb =  if (hasRailWay()) "☑" else "☐"
+    val nightRideSymb =  if (hasNightRide()) "☑" else "☐"
 
     return context.getString(R.string.description_data, towLifts, chairLifts,
         cabinLifts, seasonDateBegin, seasonDateEnd, railwayAvailSymb, nightRideSymb)
+
 }
