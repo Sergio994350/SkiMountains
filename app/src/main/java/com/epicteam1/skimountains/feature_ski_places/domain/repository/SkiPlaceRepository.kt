@@ -6,7 +6,7 @@ interface SkiPlaceRepository {
 
     suspend fun getInitAllSkiPlacesFirebase()
 
-    suspend fun getSearchFirebase(search: String)
+    suspend fun getFilteredSkiPlaces(filterString: String): List<SkiPlace>
 
     suspend fun getSkiPlaceById(skiPlaceId: String): SkiPlace
 
