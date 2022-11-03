@@ -25,7 +25,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SaveFragment : Fragment(R.layout.fragment_save) {
 
-    private lateinit var binding: FragmentSaveBinding
+    private var _binding: FragmentSaveBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var saveAdapter: SaveAdapter
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
@@ -34,7 +36,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSaveBinding.inflate(inflater)
+        _binding = FragmentSaveBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -105,5 +107,10 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         saveAdapter = SaveAdapter()
         binding.saveRecyclerView.adapter = saveAdapter
         binding.saveRecyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

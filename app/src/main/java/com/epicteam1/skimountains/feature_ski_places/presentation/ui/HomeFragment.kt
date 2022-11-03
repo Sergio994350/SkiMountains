@@ -15,7 +15,6 @@ import com.epicteam1.skimountains.feature_ski_places.core.Constants.DETAILS
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SkiPlacesAdapter
-import com.epicteam1.skimountains.feature_ski_places.presentation.ui.SplashFragment.Companion.startCount
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -23,7 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var skiPlacesAdapter: SkiPlacesAdapter
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
@@ -32,7 +33,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,11 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setAdapter()
         setObservers()
-        if (startCount <= 1) {
-            initDatabase()
-        } else {
-            loadSkiPlaceList()
-        }
+        loadSkiPlaceList()
     }
 
     private fun setObservers() {
@@ -85,12 +82,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun initDatabase() {
-        startCount++
-        skiPlaceViewModel.getAllSkiPlacesFb()
-    }
-
     private fun loadSkiPlaceList() {
         skiPlaceViewModel.getAllSkiPlaces()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

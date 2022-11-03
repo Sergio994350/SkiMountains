@@ -13,7 +13,6 @@ import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetAllSkiPlacesUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetInitAllSkiPlacesFirebaseUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetFilteredSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlaceDetailsUseCase
@@ -27,7 +26,6 @@ class SkiPlaceViewModel(
     app: Application,
     private val deleteSkiPlaceUseCase: DeleteSkiPlaceUseCase,
     private val getAllSkiPlacesUseCase: GetAllSkiPlacesUseCase,
-    private val getInitAllSkiPlacesFirebaseUseCase: GetInitAllSkiPlacesFirebaseUseCase,
     private val getSavedSkiPlacesUseCase: GetSavedSkiPlacesUseCase,
     private val getFilteredSkiPlacesUseCase: GetFilteredSkiPlacesUseCase,
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
@@ -46,15 +44,6 @@ class SkiPlaceViewModel(
 
     fun getFilteredSkiPlaces(search: String) = viewModelScope.launch {
         getFilteredSkiPlacesUseCase.execute(search)
-    }
-
-    fun getAllSkiPlacesFb() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                getInitAllSkiPlacesFirebaseUseCase.execute()
-                getSkiPlaces()
-            }
-        }
     }
 
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {

@@ -25,7 +25,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    private lateinit var binding: FragmentDetailBinding
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
+
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
     override fun onCreateView(
@@ -33,7 +35,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailBinding.inflate(inflater)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -79,5 +81,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
         binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
         binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
