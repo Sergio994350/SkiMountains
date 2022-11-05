@@ -12,7 +12,6 @@ val featureSkiPlacesPresentationModule = module {
             app = androidApplication(),
             deleteSkiPlaceUseCase = get(),
             getAllSkiPlacesUseCase = get(),
-            getInitAllSkiPlacesFirebaseUseCase = get(),
             getSavedSkiPlacesUseCase = get(),
             getFilteredSkiPlacesUseCase = get(),
             getSkiPlaceDetailsUseCase = get(),

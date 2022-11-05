@@ -23,6 +23,9 @@ interface SkiDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(skiPlaceEntity: SkiPlaceEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertList(skiPlaceEntityList: List<SkiPlaceEntity>)
+
     @Delete
     suspend fun deleteSkiPlace(skiPlaceEntity: SkiPlaceEntity)
 

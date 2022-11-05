@@ -11,18 +11,12 @@ import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    companion object {
-        var startCount = 0
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000L)
-            startCount++
             findNavController().navigate(R.id.action_splash_to_home_fragment)
         }
     }
-
 }
