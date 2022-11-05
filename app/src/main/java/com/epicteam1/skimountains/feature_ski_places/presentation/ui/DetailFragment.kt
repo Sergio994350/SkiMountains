@@ -22,7 +22,6 @@ import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -58,15 +57,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun setOnClickListeners(view: View) {
-        card_view_back.setOnClickListener {
+        binding.cardViewBack.setOnClickListener {
             findNavController().apply { popBackStack() }
         }
 
-        btn_how_to_get_details.setOnClickListener {
+        binding.btnHowToGetDetails.setOnClickListener {
             findNavController().navigate(R.id.action_details_to_how_to_get_fragment)
         }
 
-        card_view_save_ski_place_details.setOnClickListener {
+        binding.cardViewSaveSkiPlaceDetails.setOnClickListener {
             Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                 setBackgroundTint(Color.DKGRAY)
@@ -83,13 +82,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
         binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
         binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
-        btn_play_youtube_details.setOnClickListener {
+        binding.btnPlayYoutubeDetails.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.youTubeLink)))
         }
-        btn_web_cite_details.setOnClickListener {
+        binding.btnWebCiteDetails.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCite)))
         }
-        btn_web_camera_details.setOnClickListener {
+        binding.btnWebCameraDetails.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
         }
     }
