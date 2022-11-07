@@ -129,5 +129,6 @@ fun SkiPlace.getDescriptionDataRus(context: Context) : String {
 
     return context.getString(R.string.description_data, towLifts, chairLifts,
         cabinLifts, seasonDateBegin, seasonDateEnd, railwayAvailSymb, nightRideSymb)
-
 }
+
+fun SkiPlace.getExtendedName() = "$nameRus $regionRus"

@@ -28,7 +28,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
     override fun onCreateView(
@@ -44,12 +43,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val skiPlaceArg: String = arguments?.getString(Constants.DETAILS)!!
-
+        val skiPlaceArg: String? = arguments?.getString(Constants.DETAILS)
         setObservers()
         setOnClickListeners(view)
-        skiPlaceViewModel.getSkiPlaceDetailsById(skiPlaceArg)
-
+        skiPlaceArg?.let {
+            skiPlaceViewModel.getSkiPlaceDetailsById(skiPlaceArg)
+        }
     }
 
     private fun setObservers() {
@@ -66,6 +65,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
 
         binding.cardViewSaveSkiPlaceDetails.setOnClickListener {
+            skiPlaceViewModel.saveCurrentSkiPlace()
             Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                 setBackgroundTint(Color.DKGRAY)

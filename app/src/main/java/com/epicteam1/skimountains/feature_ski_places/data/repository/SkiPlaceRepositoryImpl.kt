@@ -47,4 +47,10 @@ class SkiPlaceRepositoryImpl(
         }
         skiDatabase.getSkiDao().deleteSkiPlace(skiPlace.toSkiPlaceEntity())
     }
+
+    override suspend fun reloadSkiPlaces() {
+        skiDatabase.getSkiDao().deleteAllRecords()
+        val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME).map { it.toSkiPlace() }
+        skiDatabase.getSkiDao().insertList(skiPlaces.map { it.toSkiPlaceEntity() })
+    }
 }

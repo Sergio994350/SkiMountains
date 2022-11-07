@@ -46,10 +46,6 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         setAdapter()
         setObservers()
 
-        saveAdapter.setOnItemClickListener {
-                skiPlace -> onSkiPlaceClick(skiPlace)
-        }
-
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -104,7 +100,9 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
     }
 
     private fun setAdapter() {
-        saveAdapter = SaveAdapter()
+        saveAdapter = SaveAdapter() {
+            skiPlace -> onSkiPlaceClick(skiPlace)
+        }
         binding.saveRecyclerView.adapter = saveAdapter
         binding.saveRecyclerView.layoutManager = LinearLayoutManager(context)
     }

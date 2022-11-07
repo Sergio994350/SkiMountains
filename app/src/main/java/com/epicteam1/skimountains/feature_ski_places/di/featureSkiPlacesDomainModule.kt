@@ -5,6 +5,7 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetAllSkiPl
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetFilteredSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlaceDetailsUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.DeleteSkiPlaceUseCaseImpl
@@ -12,6 +13,7 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementat
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.GetSavedSkiPlacesUseCaseImpl
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.GetFilteredSkiPlacesUseCaseImpl
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.GetSkiPlaceDetailsUseCaseImpl
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.ReloadSkiPlacesUseCaseImpl
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.SaveSkiPlaceUseCaseImpl
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.implementations.UpsertUseCaseImpl
 import org.koin.dsl.module
@@ -25,4 +27,5 @@ val featureSkiPlacesDomainModule = module {
     factory<GetSkiPlaceDetailsUseCase> { GetSkiPlaceDetailsUseCaseImpl(skiPlaceRepository = get()) }
     factory<SaveSkiPlaceUseCase> { SaveSkiPlaceUseCaseImpl(skiPlaceRepository = get()) }
     factory<UpsertUseCase> { UpsertUseCaseImpl(skiPlaceRepository = get()) }
+    factory<ReloadSkiPlacesUseCase> { ReloadSkiPlacesUseCaseImpl(skiPlaceRepository = get()) }
 }
