@@ -29,4 +29,5 @@
     <string name="version_1_0">Version 1.0</string>
     <string name="my_profile">My Profile</string>
     <string name="web_cite">Web-cite</string>
+    <string name="refresh_data">Refresh Data</string>
 </resources>

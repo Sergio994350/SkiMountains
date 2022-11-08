@@ -16,6 +16,7 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetAllSkiPl
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetFilteredSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlaceDetailsUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,8 @@ class SkiPlaceViewModel(
     private val getFilteredSkiPlacesUseCase: GetFilteredSkiPlacesUseCase,
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
     private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
-    private val upsertUseCase: UpsertUseCase
+    private val upsertUseCase: UpsertUseCase,
+    private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase
 ) : AndroidViewModel(app) {
 
     private val _skiPlacesListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
@@ -67,6 +69,12 @@ class SkiPlaceViewModel(
         }
     }
 
+    fun reloadSkiPlacesList() = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            reloadSkiPlacesUseCase.execute()
+        }
+    }
+
     fun getAllSkiPlacesSaved() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             val skiPlacesSaved = getSavedSkiPlacesUseCase.execute()
@@ -92,6 +100,13 @@ class SkiPlaceViewModel(
         val skiPlaces = getAllSkiPlacesUseCase.execute()
         withContext(Dispatchers.Main) {
             _skiPlacesListLoaded.value = skiPlaces
+        }
+    }
+
+    fun saveCurrentSkiPlace() = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            val skiPlaceSaved = _skiPlaceDetailLoaded.value
+            skiPlaceSaved?.let { saveSkiPlacesUseCase.execute(skiPlaceSaved) }
         }
     }
 

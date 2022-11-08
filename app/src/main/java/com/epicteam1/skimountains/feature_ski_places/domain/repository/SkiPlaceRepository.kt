@@ -18,4 +18,5 @@ interface SkiPlaceRepository {
 
     suspend fun deleteSkiPlace(skiPlace: SkiPlace)
 
+    suspend fun reloadSkiPlaces()
 }
