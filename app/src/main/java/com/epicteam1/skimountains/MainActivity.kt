@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
