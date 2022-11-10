@@ -13,9 +13,6 @@ class SkiPlaceRepositoryImpl(
     private val firebaseDataSource: FirebaseDataSource,
 ) : SkiPlaceRepository {
 
-    override suspend fun getFilteredSkiPlaces(filterString: String) =
-        skiDatabase.getSkiDao().getFilteredCollection(filterString).map { it.toSkiPlace() }
-
     override suspend fun getSkiPlaceById(skiPlaceId: String) =
         skiDatabase.getSkiDao().getSkiPlaceById(skiPlaceId).toSkiPlace()
 

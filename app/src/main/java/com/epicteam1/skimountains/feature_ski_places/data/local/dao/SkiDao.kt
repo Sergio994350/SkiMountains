@@ -32,7 +32,4 @@ interface SkiDao {
     @Query("DELETE FROM ski_place_table")
     suspend fun deleteAllRecords()
 
-    @Query("SELECT * FROM ski_place_table WHERE nameRus = :filter OR nameEng = :filter OR regionRus = :filter OR regionEng = :filter OR regionBig = :filter")
-    suspend fun getFilteredCollection(filter: String): List<SkiPlaceEntity>
-
 }

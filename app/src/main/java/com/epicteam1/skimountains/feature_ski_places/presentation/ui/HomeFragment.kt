@@ -13,6 +13,7 @@ import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentHomeBinding
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.DETAILS
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
+import com.epicteam1.skimountains.feature_ski_places.core.EMPTY
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SkiPlacesAdapter
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
@@ -44,11 +45,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setAdapter()
         setObservers()
         setFragmentListeners()
-        loadSkiPlaceList()
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        val filterString: String = binding.searchSkiPlace.editText?.text.toString()
+        loadSkiPlacesList(filterString = filterString)
+    }
     private fun setObservers() {
         skiPlaceViewModel.skiPlacesListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesList)
+        skiPlaceViewModel.skiPlacesFilteredListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesList)
     }
 
     private fun updateSkiPlacesList(skiPlaces: List<SkiPlace>) {
@@ -83,10 +89,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun loadSkiPlaceList() {
-        skiPlaceViewModel.getAllSkiPlaces()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -95,7 +97,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setFragmentListeners() {
         binding.ivRefreshHome.setOnClickListener {
             skiPlaceViewModel.reloadSkiPlacesList()
-            loadSkiPlaceList()
+            binding.searchSkiPlace.editText?.text?.clear()
+            loadSkiPlacesList()
         }
+        binding.searchSkiPlace.setEndIconOnClickListener {
+            val filterString: String = binding.searchSkiPlace.editText?.text.toString()
+            loadSkiPlacesList(filterString = filterString)
+        }
+    }
+
+    private fun loadSkiPlacesList(filterString: String = String.EMPTY) {
+        skiPlaceViewModel.getSkiPlaces(filterString = filterString.trim())
     }
 }
