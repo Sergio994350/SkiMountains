@@ -29,14 +29,18 @@
     <string name="okruzhnost">●</string>
     <string name="ski_places_app">Ski Places App</string>
     <string name="version_1_0">Version 1.0</string>
-    <string name="my_profile">My Profile</string>
+    <string name="my_profile">Профиль</string>
     <string name="web_cite">Web-cite</string>
     <string name="refresh_data">Refresh Data</string>
     <string name="enter_your_email">Введите Ваш email</string>
     <string name="enter_your_password">Введите Ваш пароль</string>
     <string name="repeat_your_password">Повторите Ваш пароль</string>
+    <string name="password_not_match">Пароли не совпадают</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="already_registered_enter">Уже зарегистрирован, войти</string>
     <string name="enter">Войти</string>
     <string name="not_registered_yet_sign_up">Еще не зарегистрирован, регистрация</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="reset_password_email">Сброс пароля (e-mail)</string>
+    <string name="email_not_found">email не задан</string>
 </resources>

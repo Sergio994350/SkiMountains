@@ -18,25 +18,13 @@
         android:theme="@style/Theme.SkiMountains"
         tools:targetApi="31">
         <activity
-            android:name=".feature_auth.presentation.ui.SplashActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".feature_auth.presentation.ui.SignInActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".feature_auth.presentation.ui.SignUpActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
         </activity>
     </application>
 </manifest>

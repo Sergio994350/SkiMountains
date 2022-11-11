@@ -31,32 +31,41 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlSymmetry" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/search_ski_place"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="@drawable/square_circle_corners"
-                android:drawableStart="@drawable/ic_search_24"
-                android:drawableEnd="@drawable/ic_baseline_input_24"
-                android:hint="@string/search_ski_place"
-                android:inputType="textPersonName"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_16sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_fragment_home_title"
-                tools:ignore="RtlSymmetry" />
-
-            <LinearLayout
-                android:id="@+id/ll_popular_places"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/square_circle_corners"
+                android:inputType="textPersonName"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_16sdp"
+                app:endIconDrawable="@drawable/ic_baseline_input_24"
+                app:endIconMode="custom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_fragment_home_title"
+                app:startIconDrawable="@drawable/ic_search_24"
+                tools:ignore="RtlSymmetry">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/search_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_39sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:hint="@string/search_ski_place" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_popular_places"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_22sdp"
+                android:paddingStart="@dimen/_5sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/search_ski_place">
 
