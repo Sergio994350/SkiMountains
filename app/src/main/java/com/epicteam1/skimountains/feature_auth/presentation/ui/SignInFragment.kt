@@ -7,34 +7,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentSignInBinding
 import com.epicteam1.skimountains.feature_auth.presentation.viewModel.AuthViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
-    private val viewModel : AuthViewModel by activityViewModels()
+    private val authViewModel by viewModel<AuthViewModel>()
     private var _binding: FragmentSignInBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
     private val TAG = "SignInFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignInBinding.inflate(inflater , container , false)
         listenToChannels()
         registerObservers()
-        binding?.apply {
+        binding.apply {
             signInButton.setOnClickListener {
                 val email = emailEt.text.toString()
                 val password = passET.text.toString()
-                viewModel.signInUser(email, password)
+                authViewModel.signInUser(email, password)
             }
 
             tvNotRegisteredYet.setOnClickListener {
@@ -45,11 +45,11 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 findNavController().navigate(R.id.action_sign_in_to_reset_password_fragment)
             }
         }
-        return binding?.root
+        return binding.root
     }
 
     private fun registerObservers() {
-        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
+        authViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             user?.let {
                 findNavController().navigate(R.id.action_sign_in_to_home_fragment)
             }
@@ -58,10 +58,10 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private fun listenToChannels() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.allEventsFlow.collect { event ->
+            authViewModel.allEventsFlow.collect { event ->
                 when(event){
                     is AuthViewModel.AllEvents.Error -> {
-                        binding?.apply {
+                        binding.apply {
                             errorTxt.text =  event.error
                         }
                     }
@@ -70,12 +70,12 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                     }
                     is AuthViewModel.AllEvents.ErrorCode -> {
                         if (event.code == 1)
-                            binding?.apply {
+                            binding.apply {
                                 emailEt.error = (R.string.enter_your_email).toString()
                             }
 
                         if(event.code == 2)
-                            binding?.apply {
+                            binding.apply {
                                 passET.error = (R.string.enter_your_password).toString()
                             }
                     }
@@ -87,8 +87,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

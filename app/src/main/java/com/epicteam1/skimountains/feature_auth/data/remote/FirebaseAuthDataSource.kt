@@ -1,16 +1,16 @@
-package com.epicteam1.skimountains.feature_auth.domain.repository.firebase
+package com.epicteam1.skimountains.feature_auth.data.remote
 
 import com.google.firebase.auth.FirebaseUser
 
-interface BaseAuth {
+interface FirebaseAuthDataSource {
 
     suspend fun signUpWithEmailPassword(email: String, password: String): FirebaseUser?
 
     suspend fun signInWithEmailPassword(email: String, password: String): FirebaseUser?
 
-    fun signOut(): FirebaseUser?
+    suspend fun signOut(): FirebaseUser?
 
-    fun getUser(): FirebaseUser?
+    suspend fun getUser(): FirebaseUser?
 
     suspend fun sendPasswordReset(email: String)
 }

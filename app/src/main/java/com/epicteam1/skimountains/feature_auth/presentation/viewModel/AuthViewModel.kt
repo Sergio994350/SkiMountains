@@ -4,14 +4,18 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.epicteam1.skimountains.feature_auth.domain.repository.BaseAuthRepository
+import com.epicteam1.skimountains.feature_auth.domain.usecases.*
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class AuthViewModel (
-    private val repository: BaseAuthRepository
+    private val signInWithEmailPasswordUseCase: SignInWithEmailPasswordUseCase,
+    private val signUpWithEmailPasswordUseCase: SignUpWithEmailPasswordUseCase,
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val signOutUseCase: SignOutUseCase,
+    private val sendResetPasswordUseCase: SendResetPasswordUseCase
 ) : ViewModel() {
 
     private val TAG = "AuthViewModel"
@@ -53,10 +57,9 @@ class AuthViewModel (
         }
     }
 
-
     private fun actualSignInUser(email: String, password: String) = viewModelScope.launch {
         try {
-            val user = repository.signInWithEmailPassword(email, password)
+            val user = signInWithEmailPasswordUseCase.execute(email, password)
             user?.let {
                 _firebaseUser.postValue(it)
                 eventsChannel.send(AllEvents.Message("login success"))
@@ -70,7 +73,7 @@ class AuthViewModel (
 
     private fun actualSignUpUser(email: String, password: String) = viewModelScope.launch {
         try {
-            val user = repository.signUpWithEmailPassword(email, password)
+            val user = signUpWithEmailPasswordUseCase.execute(email, password)
             user?.let {
                 _firebaseUser.postValue(it)
                 eventsChannel.send(AllEvents.Message("sign up success"))
@@ -84,7 +87,7 @@ class AuthViewModel (
 
     fun signOut() = viewModelScope.launch {
         try {
-            val user = repository.signOut()
+            val user = signOutUseCase.execute()
             user?.let {
                 eventsChannel.send(AllEvents.Message("logout failure"))
             } ?: eventsChannel.send(AllEvents.Message("sign out successful"))
@@ -99,7 +102,7 @@ class AuthViewModel (
     }
 
     fun getCurrentUser() = viewModelScope.launch {
-        val user = repository.getCurrentUser()
+        val user = getCurrentUserUseCase.execute()
         _firebaseUser.postValue(user)
     }
 
@@ -116,7 +119,7 @@ class AuthViewModel (
 
     private fun sendPasswordResetEmail(email: String) = viewModelScope.launch {
         try {
-            val result = repository.sendResetPassword(email)
+            val result = sendResetPasswordUseCase.execute(email)
             if (result) {
                 eventsChannel.send(AllEvents.Message("reset email sent"))
             } else {
