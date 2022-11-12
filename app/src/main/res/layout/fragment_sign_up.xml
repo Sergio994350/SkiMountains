@@ -94,16 +94,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordLayout" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signup_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
-        android:background="@color/sky_blue"
-        android:text="@string/sign_up"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/_10sdp"
+        android:backgroundTint="@color/sky_blue"
+        android:contentDescription="@string/sign_up"
+        android:elevation="@dimen/_3sdp"
+        android:text="@string/sign_up"
+        android:textColor="@color/dark_grey"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/_10sdp"
         app:layout_constraintBottom_toTopOf="@id/tv_already_registered"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

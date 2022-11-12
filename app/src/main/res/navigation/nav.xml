@@ -143,5 +143,10 @@
             app:destination="@id/navigation_sign_up"
             app:popUpTo="@id/navigation_profile"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profile_to_home_fragment"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_profile"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

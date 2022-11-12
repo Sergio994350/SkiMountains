@@ -4,13 +4,17 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.epicteam1.skimountains.feature_auth.domain.usecases.*
+import com.epicteam1.skimountains.feature_auth.domain.usecases.GetCurrentUserUseCase
+import com.epicteam1.skimountains.feature_auth.domain.usecases.SendResetPasswordUseCase
+import com.epicteam1.skimountains.feature_auth.domain.usecases.SignInWithEmailPasswordUseCase
+import com.epicteam1.skimountains.feature_auth.domain.usecases.SignOutUseCase
+import com.epicteam1.skimountains.feature_auth.domain.usecases.SignUpWithEmailPasswordUseCase
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class AuthViewModel (
+class AuthViewModel(
     private val signInWithEmailPasswordUseCase: SignInWithEmailPasswordUseCase,
     private val signUpWithEmailPasswordUseCase: SignUpWithEmailPasswordUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,

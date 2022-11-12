@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_8sdp"
     android:background="@drawable/skier_bg"
+    android:padding="@dimen/_8sdp"
     tools:context=".feature_ski_places.presentation.ui.ProfileFragment">
 
     <LinearLayout
@@ -49,11 +49,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp">
+
             <ImageView
                 android:id="@+id/profileImage_profileFrag"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:src="@drawable/man" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -63,34 +65,46 @@
 
                 <TextView
                     android:id="@+id/tv_email_profile_fragment"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/_190sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:fontFamily="@font/quicksand_medium"
                     android:text="@string/email_not_found"
                     android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signup_button_profile"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tv_change_password"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/change_password"
+        android:textColor="@color/sky_blue"
+        android:layout_marginTop="@dimen/_18sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signup_button_profile"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
-        android:background="@color/sky_blue"
-        android:text="@string/sign_up"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/_10sdp"
+        android:backgroundTint="@color/sky_blue"
+        android:contentDescription="@string/sign_up"
+        android:elevation="@dimen/_3sdp"
+        android:text="@string/sign_up"
+        android:textColor="@color/dark_grey"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

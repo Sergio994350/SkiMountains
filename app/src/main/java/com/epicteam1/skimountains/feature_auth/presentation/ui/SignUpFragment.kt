@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentSignUpBinding
 import com.epicteam1.skimountains.feature_auth.presentation.viewModel.AuthViewModel
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.SIGN_UP_SUCCESS
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +38,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 val password = passET.text.toString()
                 val confirmPass = confirmPassEt.text.toString()
                 authViewModel.signUpUser(email, password, confirmPass)
+                Toast.makeText(context, SIGN_UP_SUCCESS, Toast.LENGTH_SHORT).show()
             }
             tvAlreadyRegistered.setOnClickListener {
                 findNavController().navigate(R.id.action_sign_up_to_sign_in_fragment)
