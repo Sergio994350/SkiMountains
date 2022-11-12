@@ -12,9 +12,8 @@ import androidx.lifecycle.viewModelScope
 import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteSkiPlaceUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetAllSkiPlacesUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetFilteredSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlaceDetailsUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
@@ -26,9 +25,8 @@ import kotlinx.coroutines.withContext
 class SkiPlaceViewModel(
     app: Application,
     private val deleteSkiPlaceUseCase: DeleteSkiPlaceUseCase,
-    private val getAllSkiPlacesUseCase: GetAllSkiPlacesUseCase,
+    private val getSkiPlacesUseCase: GetSkiPlacesUseCase,
     private val getSavedSkiPlacesUseCase: GetSavedSkiPlacesUseCase,
-    private val getFilteredSkiPlacesUseCase: GetFilteredSkiPlacesUseCase,
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
     private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
     private val upsertUseCase: UpsertUseCase,
@@ -38,15 +36,14 @@ class SkiPlaceViewModel(
     private val _skiPlacesListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
     val skiPlacesListLoaded: LiveData<List<SkiPlace>> get() = _skiPlacesListLoaded
 
+    private val _skiPlacesFilteredListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
+    val skiPlacesFilteredListLoaded: LiveData<List<SkiPlace>> get() = _skiPlacesFilteredListLoaded
+
     private val _skiSavedPlacesListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
     val skiSavedPlacesListLoaded: LiveData<List<SkiPlace>> get() = _skiSavedPlacesListLoaded
 
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
-
-    fun getFilteredSkiPlaces(search: String) = viewModelScope.launch {
-        getFilteredSkiPlacesUseCase.execute(search)
-    }
 
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
@@ -63,9 +60,11 @@ class SkiPlaceViewModel(
         }
     }
 
-    fun getAllSkiPlaces() = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
-            getSkiPlaces()
+    fun getSkiPlaces(filterString: String) {
+        if (filterString.isEmpty()) {
+            getAllSkiPlaces()
+        } else {
+            getFilteredSkiPlaces(filterString = filterString)
         }
     }
 
@@ -96,17 +95,25 @@ class SkiPlaceViewModel(
         }
     }
 
-    private suspend fun getSkiPlaces() {
-        val skiPlaces = getAllSkiPlacesUseCase.execute()
-        withContext(Dispatchers.Main) {
-            _skiPlacesListLoaded.value = skiPlaces
-        }
-    }
-
     fun saveCurrentSkiPlace() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             val skiPlaceSaved = _skiPlaceDetailLoaded.value
             skiPlaceSaved?.let { saveSkiPlacesUseCase.execute(skiPlaceSaved) }
+        }
+    }
+
+    private fun getFilteredSkiPlaces(filterString: String) = viewModelScope.launch {
+        val currentSkiPlacesList = skiPlacesListLoaded.value ?: emptyList()
+        val skiPlaces = getSkiPlacesUseCase.execute(filterString, currentSkiPlacesList)
+        withContext(Dispatchers.Main) {
+            _skiPlacesFilteredListLoaded.value = skiPlaces
+        }
+    }
+
+    private fun getAllSkiPlaces() = viewModelScope.launch {
+        val skiPlaces = getSkiPlacesUseCase.execute()
+        withContext(Dispatchers.Main) {
+            _skiPlacesListLoaded.value = skiPlaces
         }
     }
 
