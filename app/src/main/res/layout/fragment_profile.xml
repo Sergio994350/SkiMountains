@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/skier_bg"
     android:padding="@dimen/_8sdp"
     tools:context=".feature_ski_places.presentation.ui.ProfileFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_18sdp"
-        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_220sdp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,10 +21,8 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_weight="1"
             android:fontFamily="@font/quicksand_regular"
             android:gravity="center"
             android:text="@string/my_profile"
@@ -33,15 +31,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
-        <ImageView
-            android:id="@+id/searchIv_ProfileFrag"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_search_24"
-            app:tint="@color/dark_grey" />
-
     </LinearLayout>
 
 
@@ -50,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_18sdp"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +49,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp">
-
 
             <ImageView
                 android:id="@+id/profileImage_profileFrag"
@@ -76,210 +64,47 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/profileName_profileFrag"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_email_profile_fragment"
+                    android:layout_width="@dimen/_190sdp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:fontFamily="@font/quicksand_medium"
-                    android:text="Степан Горнолыжников"
+                    android:text="@string/email_not_found"
                     android:textColor="@color/dark_grey"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/profileEmail_profileFrag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/quicksand_medium"
-                    android:text="stepan_gora@mail.ru"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/uploadImage_profileFrag"
-            android:layout_width="24dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_bg"
-            android:fontFamily="@font/quicksand_medium"
-            android:text="Upload Image"
-            android:visibility="gone" />
-
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_change_password"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        android:text="@string/change_password"
+        android:textColor="@color/sky_blue"
+        android:layout_marginTop="@dimen/_18sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/addressCard_ProfilePage"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/quicksand_medium"
-                        android:text="Address"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/quicksand_medium"
-                        android:text="Московская область, г.Дмитров"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/quicksand_medium"
-                        android:text="Phone Number"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/quicksand_medium"
-                        android:text="+7(999)111-22-33"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/settingCd_profileFrag"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-
-            android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/quicksand_medium"
-                        android:text="Settings"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/quicksand_medium"
-                        android:text="Notifications, password"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:visibility="gone"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signup_button_profile"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:backgroundTint="@color/sky_blue"
+        android:contentDescription="@string/sign_up"
+        android:elevation="@dimen/_3sdp"
+        android:text="@string/sign_up"
+        android:textColor="@color/dark_grey"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/circle_progress" />
-
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

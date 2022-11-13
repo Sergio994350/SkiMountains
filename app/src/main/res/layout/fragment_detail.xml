@@ -65,7 +65,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:backgroundTint="@color/light_grey"
+                    android:backgroundTint="@color/sky_blue"
                     android:clickable="true"
                     android:contentDescription="@string/how_to_get_title"
                     android:elevation="@dimen/_4sdp"
@@ -74,7 +74,7 @@
                     app:cornerRadius="@dimen/_8sdp"
                     app:icon="@drawable/ic_how_to_get_location_two_tone"
                     app:iconSize="@dimen/_28sdp"
-                    app:iconTint="@color/dark_blue"
+                    app:iconTint="@color/dark_grey"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
@@ -82,7 +82,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:backgroundTint="@color/light_grey"
+                    android:backgroundTint="@color/sky_blue"
                     android:clickable="true"
                     android:contentDescription="@string/web_cite"
                     android:elevation="@dimen/_4sdp"
@@ -91,7 +91,7 @@
                     app:cornerRadius="@dimen/_8sdp"
                     app:icon="@drawable/ic_web"
                     app:iconSize="@dimen/_27sdp"
-                    app:iconTint="@color/dark_blue"
+                    app:iconTint="@color/dark_grey"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
@@ -99,7 +99,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:backgroundTint="@color/light_grey"
+                    android:backgroundTint="@color/sky_blue"
                     android:clickable="true"
                     android:contentDescription="@string/web_camera"
                     android:elevation="@dimen/_4sdp"
@@ -108,14 +108,14 @@
                     app:cornerRadius="@dimen/_8sdp"
                     app:icon="@drawable/ic_baseline_camera_outdoor_24"
                     app:iconSize="@dimen/_29sdp"
-                    app:iconTint="@color/dark_blue"
+                    app:iconTint="@color/dark_grey"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_play_youtube_details"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
-                    android:backgroundTint="@color/light_grey"
+                    android:backgroundTint="@color/sky_blue"
                     android:clickable="true"
                     android:contentDescription="@string/see_video_on_youtube"
                     android:elevation="@dimen/_4sdp"
