@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentSignUpBinding
 import com.epicteam1.skimountains.feature_auth.presentation.viewModel.AuthViewModel
-import com.epicteam1.skimountains.feature_ski_places.core.Constants
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMAIL_EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_NOT_MATCH
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SIGN_UP_SUCCESS
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,17 +75,17 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
                     }
                     is AuthViewModel.AllEvents.ErrorCode -> {
-                        if (event.code == 1)
+                        if (event.code == EMAIL_EMPTY)
                             binding.apply {
                                 emailEt.error = (R.string.enter_your_email).toString()
                             }
 
-                        if (event.code == 2)
+                        if (event.code == PASSWORD_EMPTY)
                             binding.apply {
                                 passET.error = (R.string.enter_your_password).toString()
                             }
 
-                        if (event.code == 3)
+                        if (event.code == PASSWORD_NOT_MATCH)
                             binding.apply {
                                 confirmPassEt.error = (R.string.password_not_match).toString()
                             }

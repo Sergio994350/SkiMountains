@@ -7,12 +7,12 @@ import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthDataSourceImpl : FirebaseAuthDataSource {
     override suspend fun signUpWithEmailPassword(email: String, password: String): FirebaseUser? {
-        Firebase.auth.createUserWithEmailAndPassword(email,password).await()
+        Firebase.auth.createUserWithEmailAndPassword(email, password).await()
         return Firebase.auth.currentUser
     }
 
     override suspend fun signInWithEmailPassword(email: String, password: String): FirebaseUser? {
-        Firebase.auth.signInWithEmailAndPassword(email , password).await()
+        Firebase.auth.signInWithEmailAndPassword(email, password).await()
         return Firebase.auth.currentUser
     }
 

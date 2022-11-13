@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.epicteam1.skimountains.R
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.SPLASH_DELAY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,7 +17,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         super.onCreate(savedInstanceState)
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000L)
+            delay(SPLASH_DELAY)
             findNavController().navigate(R.id.action_splash_to_home_fragment)
         }
     }

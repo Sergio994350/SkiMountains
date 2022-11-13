@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentPasswordResetBinding
 import com.epicteam1.skimountains.feature_auth.presentation.viewModel.AuthViewModel
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMAIL_EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMPTY_EMAIL_MESSAGE
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,9 +47,9 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_password_reset) {
                         }
                     }
                     is AuthViewModel.AllEvents.ErrorCode -> {
-                        if (event.code == 1)
+                        if (event.code == EMAIL_EMPTY)
                             binding.apply {
-                                userEmailEtvl.error = "email should not be empty!"
+                                userEmailEtvl.error = EMPTY_EMAIL_MESSAGE
                             }
                     }
                 }

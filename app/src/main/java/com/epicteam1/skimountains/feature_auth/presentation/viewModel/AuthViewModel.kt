@@ -9,6 +9,15 @@ import com.epicteam1.skimountains.feature_auth.domain.usecases.SendResetPassword
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SignInWithEmailPasswordUseCase
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SignOutUseCase
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SignUpWithEmailPasswordUseCase
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.CANNOT_SEND_PASSWORD_RESET
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMAIL_EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMAIL_HAS_SEND
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOGOUT_FAILURE_MESSAGE
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOG_IN_SUCCESS
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOG_OUT_SUCCESS
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_NOT_MATCH
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.SIGN_UP_SUCCESS
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -33,10 +42,10 @@ class AuthViewModel(
     fun signInUser(email: String, password: String) = viewModelScope.launch {
         when {
             email.isEmpty() -> {
-                eventsChannel.send(AllEvents.ErrorCode(1))
+                eventsChannel.send(AllEvents.ErrorCode(EMAIL_EMPTY))
             }
             password.isEmpty() -> {
-                eventsChannel.send(AllEvents.ErrorCode(2))
+                eventsChannel.send(AllEvents.ErrorCode(PASSWORD_EMPTY))
             }
             else -> {
                 actualSignInUser(email, password)
@@ -47,13 +56,13 @@ class AuthViewModel(
     fun signUpUser(email: String, password: String, confirmPass: String) = viewModelScope.launch {
         when {
             email.isEmpty() -> {
-                eventsChannel.send(AllEvents.ErrorCode(1))
+                eventsChannel.send(AllEvents.ErrorCode(EMAIL_EMPTY))
             }
             password.isEmpty() -> {
-                eventsChannel.send(AllEvents.ErrorCode(2))
+                eventsChannel.send(AllEvents.ErrorCode(PASSWORD_EMPTY))
             }
             password != confirmPass -> {
-                eventsChannel.send(AllEvents.ErrorCode(3))
+                eventsChannel.send(AllEvents.ErrorCode(PASSWORD_NOT_MATCH))
             }
             else -> {
                 actualSignUpUser(email, password)
@@ -66,7 +75,7 @@ class AuthViewModel(
             val user = signInWithEmailPasswordUseCase.execute(email, password)
             user?.let {
                 _firebaseUser.postValue(it)
-                eventsChannel.send(AllEvents.Message("login success"))
+                eventsChannel.send(AllEvents.Message(LOG_IN_SUCCESS))
             }
         } catch (e: Exception) {
             val error = e.toString().split(":").toTypedArray()
@@ -80,7 +89,7 @@ class AuthViewModel(
             val user = signUpWithEmailPasswordUseCase.execute(email, password)
             user?.let {
                 _firebaseUser.postValue(it)
-                eventsChannel.send(AllEvents.Message("sign up success"))
+                eventsChannel.send(AllEvents.Message(SIGN_UP_SUCCESS))
             }
         } catch (e: Exception) {
             val error = e.toString().split(":").toTypedArray()
@@ -93,8 +102,8 @@ class AuthViewModel(
         try {
             val user = signOutUseCase.execute()
             user?.let {
-                eventsChannel.send(AllEvents.Message("logout failure"))
-            } ?: eventsChannel.send(AllEvents.Message("sign out successful"))
+                eventsChannel.send(AllEvents.Message(LOGOUT_FAILURE_MESSAGE))
+            } ?: eventsChannel.send(AllEvents.Message(LOG_OUT_SUCCESS))
 
             getCurrentUser()
 
@@ -113,7 +122,7 @@ class AuthViewModel(
     fun verifySendPasswordReset(email: String) {
         if (email.isEmpty()) {
             viewModelScope.launch {
-                eventsChannel.send(AllEvents.ErrorCode(1))
+                eventsChannel.send(AllEvents.ErrorCode(EMAIL_EMPTY))
             }
         } else {
             sendPasswordResetEmail(email)
@@ -125,9 +134,9 @@ class AuthViewModel(
         try {
             val result = sendResetPasswordUseCase.execute(email)
             if (result) {
-                eventsChannel.send(AllEvents.Message("reset email sent"))
+                eventsChannel.send(AllEvents.Message(EMAIL_HAS_SEND))
             } else {
-                eventsChannel.send(AllEvents.Error("could not send password reset"))
+                eventsChannel.send(AllEvents.Error(CANNOT_SEND_PASSWORD_RESET))
             }
         } catch (e: Exception) {
             val error = e.toString().split(":").toTypedArray()

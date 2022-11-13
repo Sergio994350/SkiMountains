@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_splash"
-        android:name="com.epicteam1.skimountains.feature_auth.presentation.ui.SplashFragment"
+        android:name="com.epicteam1.skimountains.feature_ski_places.presentation.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
