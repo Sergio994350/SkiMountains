@@ -13,12 +13,11 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentDetailBinding
-import com.epicteam1.skimountains.feature_ski_places.core.Constants
+import com.epicteam1.skimountains.feature_ski_places.core.*
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.HOW_TO_GET_ARGS
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
-import com.epicteam1.skimountains.feature_ski_places.core.getDescriptionDataRus
-import com.epicteam1.skimountains.feature_ski_places.core.getGeoDataRus
-import com.epicteam1.skimountains.feature_ski_places.core.getTechnicalDataRus
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
+import com.epicteam1.skimountains.feature_ski_places.presentation.model.SkiPlaceHowToGetArgs
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -29,6 +28,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
+    private lateinit var howToGetArgs: SkiPlaceHowToGetArgs
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +54,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun setObservers() {
         skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
+        skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setHowToGetArgs)
     }
 
     private fun setOnClickListeners(view: View) {
@@ -61,7 +63,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
 
         binding.btnHowToGetDetails.setOnClickListener {
-            findNavController().navigate(R.id.action_details_to_how_to_get_fragment)
+
+            val bundle = Bundle().apply{
+                putSerializable(HOW_TO_GET_ARGS, howToGetArgs)
+
+            }
+            findNavController().navigate(R.id.action_details_to_how_to_get_fragment, bundle)
         }
 
         binding.cardViewSaveSkiPlaceDetails.setOnClickListener {
@@ -91,6 +98,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.btnWebCameraDetails.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
         }
+    }
+
+    private fun setHowToGetArgs(skiPlace: SkiPlace) {
+        howToGetArgs = SkiPlaceHowToGetArgs(
+            skiPlace.howToGetText, skiPlace.howToGetPic, skiPlace.nameRus, context?.let { skiPlace.getGeoDataRus(it) } ?: String.EMPTY)
     }
 
     override fun onDestroyView() {

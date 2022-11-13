@@ -11,6 +11,7 @@ object Constants {
     const val NO_INTERNET = "No internet connection!"
     const val SUCCESS = "Success"
     const val DETAILS = "details"
+    const val HOW_TO_GET_ARGS = "how_to_get_args"
     const val SKI_PLACE_DELETED = "Ski Place Deleted"
     const val SKI_PLACE_SAVED = "Ski Place Saved"
     const val UNDO = "undo"
