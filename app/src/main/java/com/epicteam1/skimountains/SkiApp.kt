@@ -1,6 +1,9 @@
 package com.epicteam1.skimountains
 
 import android.app.Application
+import com.epicteam1.skimountains.feature_auth.di.featureAuthDataModule
+import com.epicteam1.skimountains.feature_auth.di.featureAuthDomainModule
+import com.epicteam1.skimountains.feature_auth.di.featureAuthPresentationModule
 import com.epicteam1.skimountains.feature_ski_places.di.featureSkiPlacesDataModule
 import com.epicteam1.skimountains.feature_ski_places.di.featureSkiPlacesDomainModule
 import com.epicteam1.skimountains.feature_ski_places.di.featureSkiPlacesPresentationModule
@@ -14,7 +17,8 @@ class SkiApp : Application() {
 
         startKoin {
             androidContext(this@SkiApp)
-            modules(featureSkiPlacesDataModule, featureSkiPlacesDomainModule, featureSkiPlacesPresentationModule)
+            modules(featureSkiPlacesDataModule, featureSkiPlacesDomainModule, featureSkiPlacesPresentationModule,
+            featureAuthDataModule, featureAuthDomainModule, featureAuthPresentationModule)
         }
     }
 }

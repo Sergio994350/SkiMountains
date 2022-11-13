@@ -16,6 +16,16 @@ object Constants {
     const val UNDO = "undo"
     const val HAS_NIGHTRIDE = "true"
     const val HAS_RAILWAY = "true"
+    const val LOG_OUT = "Выйти"
+    const val EMAIL_NOT_FOUND = "email не задан"
+    const val SIGN_UP = "Зарегистрироваться"
+    const val LOG_OUT_SUCCESS = "Успешный выход"
+    const val LOG_IN_SUCCESS = "Успешный вход"
+    const val EMAIL_HAS_SEND = "Email отправлен"
+    const val CANNOT_SEND_PASSWORD_RESET = "cannot send password reset"
+    const val SIGN_UP_SUCCESS = "Пользователь зарегистрирован"
+    const val EMPTY_EMAIL_MESSAGE = "email should not be empty!"
+    const val LOGOUT_FAILURE_MESSAGE = "logout failure"
 
     const val SKIPLACE_ID = "skiPlaceId"
     const val SKIPLACE_BLACKTRAILS = "blackTrails"
@@ -50,4 +60,12 @@ object Constants {
     const val SKIPLACE_YOUTUBELINK = "youTubeLink"
     const val SKIPLACE_ENTITY = "entity"
     const val SKIPLACE_ISSAVED = "isSaved"
+
+    val String.Companion.EMPTY: String get() = ""
+
+    const val EMAIL_EMPTY = 1
+    const val PASSWORD_EMPTY = 2
+    const val PASSWORD_NOT_MATCH = 3
+
+    const val SPLASH_DELAY = 2000L
 }
