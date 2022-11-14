@@ -30,6 +30,7 @@ object Constants {
     const val NO_YOUTUBE_LINK = "Видео на YouTube недоступно"
     const val NO_WEB_CITE = "Web-сайт недоступен"
     const val NO_WEB_CAMERAS = "Web-камеры недоступны"
+    const val SKI_PLACES_RELOAD = "Список трасс обновлен"
 
     const val SKIPLACE_ID = "skiPlaceId"
     const val SKIPLACE_BLACKTRAILS = "blackTrails"

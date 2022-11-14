@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentHomeBinding
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.DETAILS
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACES_RELOAD
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
 import com.epicteam1.skimountains.feature_ski_places.core.EMPTY
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
@@ -99,6 +102,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             skiPlaceViewModel.reloadSkiPlacesList()
             binding.searchSkiPlace.editText?.text?.clear()
             loadSkiPlacesList()
+            Toast.makeText(context, SKI_PLACES_RELOAD, Toast.LENGTH_SHORT).show()
         }
         binding.searchSkiPlace.setEndIconOnClickListener {
             val filterString: String = binding.searchSkiPlace.editText?.text.toString()
