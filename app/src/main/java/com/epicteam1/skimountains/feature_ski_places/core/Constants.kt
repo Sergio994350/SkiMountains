@@ -27,6 +27,10 @@ object Constants {
     const val SIGN_UP_SUCCESS = "Пользователь зарегистрирован"
     const val EMPTY_EMAIL_MESSAGE = "email should not be empty!"
     const val LOGOUT_FAILURE_MESSAGE = "logout failure"
+    const val NO_YOUTUBE_LINK = "Видео на YouTube недоступно"
+    const val NO_WEB_CITE = "Web-сайт недоступен"
+    const val NO_WEB_CAMERAS = "Web-камеры недоступны"
+    const val SKI_PLACES_RELOAD = "Список трасс обновлен"
 
     const val SKIPLACE_ID = "skiPlaceId"
     const val SKIPLACE_BLACKTRAILS = "blackTrails"

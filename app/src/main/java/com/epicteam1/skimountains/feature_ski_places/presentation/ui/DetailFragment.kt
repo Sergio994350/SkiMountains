@@ -8,14 +8,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentDetailBinding
-import com.epicteam1.skimountains.feature_ski_places.core.*
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.HOW_TO_GET_ARGS
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.NO_WEB_CAMERAS
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.NO_WEB_CITE
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.NO_YOUTUBE_LINK
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
+import com.epicteam1.skimountains.feature_ski_places.core.EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.getDescriptionDataRus
+import com.epicteam1.skimountains.feature_ski_places.core.getGeoDataRus
+import com.epicteam1.skimountains.feature_ski_places.core.getTechnicalDataRus
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.model.SkiPlaceHowToGetArgs
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
@@ -63,10 +71,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
 
         binding.btnHowToGetDetails.setOnClickListener {
-
-            val bundle = Bundle().apply{
+            val bundle = Bundle().apply {
                 putSerializable(HOW_TO_GET_ARGS, howToGetArgs)
-
             }
             findNavController().navigate(R.id.action_details_to_how_to_get_fragment, bundle)
         }
@@ -90,19 +96,34 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
         binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
         binding.btnPlayYoutubeDetails.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.youTubeLink)))
+            if (skiPlace.youTubeLink.isNotBlank()) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.youTubeLink)))
+            } else {
+                Toast.makeText(context, NO_YOUTUBE_LINK, Toast.LENGTH_LONG).show()
+            }
         }
         binding.btnWebCiteDetails.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCite)))
+            if (skiPlace.webCite.isNotBlank()) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCite)))
+            } else {
+                Toast.makeText(context, NO_WEB_CITE, Toast.LENGTH_LONG).show()
+            }
         }
         binding.btnWebCameraDetails.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
+            if (skiPlace.webCamera.isNotBlank()) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
+            } else {
+                Toast.makeText(context, NO_WEB_CAMERAS, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     private fun setHowToGetArgs(skiPlace: SkiPlace) {
         howToGetArgs = SkiPlaceHowToGetArgs(
-            skiPlace.howToGetText, skiPlace.howToGetPic, skiPlace.nameRus, context?.let { skiPlace.getGeoDataRus(it) } ?: String.EMPTY)
+            skiPlace.howToGetText,
+            skiPlace.howToGetPic,
+            skiPlace.nameRus,
+            context?.let { skiPlace.getGeoDataRus(it) } ?: String.EMPTY)
     }
 
     override fun onDestroyView() {
