@@ -2,7 +2,7 @@
     <string name="app_name">SkiMountains</string>
 
     <string name="title_home">Home</string>
-    <string name="title_save">Save</string>
+    <string name="title_favourites">Favourites</string>
     <string name="title_profile">Profile</string>
     <string name="title_detail">Detail</string>
     <string name="title_sign_up">Sign Up</string>
@@ -14,7 +14,7 @@
     <string name="subtitle_main_rv">Популярные места</string>
     <string name="abzakovo">Абзаково, Башкортостан</string>
     <string name="search_ski_place">Поиск курорта</string>
-    <string name="saved_ski_places">Сохраненные курорты</string>
+    <string name="saved_ski_places">Избранное</string>
     <string name="abzakovo_web_cite">https://abzakovo.com</string>
     <string name="abzakovo_web_cameras">https://abzakovo.com/glc/camera/</string>
     <string name="web_camera">Web-camera</string>

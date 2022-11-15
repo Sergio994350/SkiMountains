@@ -3,6 +3,7 @@ package com.epicteam1.skimountains.feature_ski_places.data.repository
 import com.epicteam1.skimountains.feature_ski_places.data.local.database.SkiDatabase
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.core.Constants
+import com.epicteam1.skimountains.feature_ski_places.core.toFavouriteEntity
 import com.epicteam1.skimountains.feature_ski_places.core.toSkiPlace
 import com.epicteam1.skimountains.feature_ski_places.core.toSkiPlaceEntity
 import com.epicteam1.skimountains.feature_ski_places.data.network.FirebaseDataSource
@@ -19,11 +20,8 @@ class SkiPlaceRepositoryImpl(
     // database
     override suspend fun upsert(skiPlace: SkiPlace) = skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
 
-    override suspend fun saveSkiPlace(skiPlace: SkiPlace) {
-        if (skiPlace.isSaved != Constants.SAVED) {
-            skiPlace.isSaved = Constants.SAVED
-        }
-        skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
+    override suspend fun addFavouriteSkiPlace(skiPlace: SkiPlace) {
+        skiDatabase.getFavouritesDao().addFavouritePlace(skiPlace.toFavouriteEntity())
     }
 
     override suspend fun getAllSkiPlaces(): List<SkiPlace> {
@@ -36,13 +34,10 @@ class SkiPlaceRepositoryImpl(
         return localSkiPlaces
     }
 
-    override suspend fun getAllSkiPlacesSaved() = skiDatabase.getSkiDao().getSkiPlacesSavedList().map { it.toSkiPlace() }
+    override suspend fun getFavouriteSkiPlaces() = skiDatabase.getFavouritesDao().getFavouriteSkiPlaces().map { it.toSkiPlace() }
 
-    override suspend fun deleteSkiPlace(skiPlace: SkiPlace) {
-        if (skiPlace.isSaved == Constants.SAVED) {
-            skiPlace.isSaved = Constants.NOT_SAVED
-        }
-        skiDatabase.getSkiDao().deleteSkiPlace(skiPlace.toSkiPlaceEntity())
+    override suspend fun deleteFavouriteSkiPlace(skiPlace: SkiPlace) {
+        skiDatabase.getFavouritesDao().deleteFavouritePlace(skiPlace.toFavouriteEntity())
     }
 
     override suspend fun reloadSkiPlaces() {

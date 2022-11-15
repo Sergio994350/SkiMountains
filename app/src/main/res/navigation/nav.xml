@@ -123,11 +123,11 @@
 
     <fragment
         android:id="@+id/navigation_save"
-        android:name="com.epicteam1.skimountains.feature_ski_places.presentation.ui.SaveFragment"
+        android:name="com.epicteam1.skimountains.feature_ski_places.presentation.ui.FavouritesFragment"
         android:label="fragment_save"
-        tools:layout="@layout/fragment_save" >
+        tools:layout="@layout/fragment_favourites" >
         <action
-            android:id="@+id/action_saveSkiPlace_to_details"
+            android:id="@+id/action_favouriteSkiPlace_to_details"
             app:destination="@id/details"
             app:popUpTo="@id/details"
             app:popUpToInclusive="true" />

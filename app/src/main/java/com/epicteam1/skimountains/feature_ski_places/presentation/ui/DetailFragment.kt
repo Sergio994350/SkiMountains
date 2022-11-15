@@ -78,7 +78,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
 
         binding.cardViewSaveSkiPlaceDetails.setOnClickListener {
-            skiPlaceViewModel.saveCurrentSkiPlace()
+            skiPlaceViewModel.addCurrentSkiPlaceToFavourites()
             Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
                 setBackgroundTint(Color.DKGRAY)

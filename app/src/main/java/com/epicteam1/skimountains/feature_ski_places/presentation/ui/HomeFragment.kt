@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentHomeBinding
-import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.DETAILS
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACES_RELOAD
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
@@ -72,7 +71,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun onSkiPlaceSaveClick(skiPlace: SkiPlace) {
-        skiPlaceViewModel.saveSkiPlace(skiPlace)
+        skiPlaceViewModel.addFavouriteSkiPlace(skiPlace)
         view?.let {
             Snackbar.make(it, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
                 animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE

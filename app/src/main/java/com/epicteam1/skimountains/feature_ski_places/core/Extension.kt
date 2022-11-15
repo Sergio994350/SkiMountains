@@ -2,6 +2,7 @@ package com.epicteam1.skimountains.feature_ski_places.core
 
 import android.content.Context
 import com.epicteam1.skimountains.R
+import com.epicteam1.skimountains.feature_ski_places.data.local.entities.FavouriteEntity
 import com.epicteam1.skimountains.feature_ski_places.data.local.entities.SkiPlaceEntity
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.google.firebase.firestore.DocumentSnapshot
@@ -144,5 +145,7 @@ fun SkiPlace.isMatchedByNameOrRegion(filterString: String): Boolean {
 
     return isMMatchedByRegion || isMatchedByName
 }
+
+fun SkiPlace.toFavouriteEntity() = FavouriteEntity(skiPlaceId = skiPlaceId)
 
 val String.Companion.EMPTY:String get() = ""

@@ -8,13 +8,13 @@ interface SkiPlaceRepository {
 
     suspend fun upsert(skiPlace: SkiPlace)
 
-    suspend fun saveSkiPlace(skiPlace: SkiPlace)
+    suspend fun addFavouriteSkiPlace(skiPlace: SkiPlace)
 
     suspend fun getAllSkiPlaces(): List<SkiPlace>
 
-    suspend fun getAllSkiPlacesSaved(): List<SkiPlace>
+    suspend fun getFavouriteSkiPlaces(): List<SkiPlace>
 
-    suspend fun deleteSkiPlace(skiPlace: SkiPlace)
+    suspend fun deleteFavouriteSkiPlace(skiPlace: SkiPlace)
 
     suspend fun reloadSkiPlaces()
 }

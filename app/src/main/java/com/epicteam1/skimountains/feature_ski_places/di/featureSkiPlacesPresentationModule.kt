@@ -10,11 +10,11 @@ val featureSkiPlacesPresentationModule = module {
     viewModel {
         SkiPlaceViewModel(
             app = androidApplication(),
-            deleteSkiPlaceUseCase = get(),
+            deleteFavouriteSkiPlaceUseCase = get(),
             getSkiPlacesUseCase = get(),
-            getSavedSkiPlacesUseCase = get(),
+            getFavouriteSkiPlacesUseCase = get(),
             getSkiPlaceDetailsUseCase = get(),
-            saveSkiPlacesUseCase = get(),
+            addFavouriteSkiPlaceUseCase = get(),
             upsertUseCase = get(),
             reloadSkiPlacesUseCase = get(),
         )

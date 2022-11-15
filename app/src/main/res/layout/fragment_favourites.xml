@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature_ski_places.presentation.ui.SaveFragment">
+    tools:context=".feature_ski_places.presentation.ui.FavouritesFragment">
 
     <TextView
-        android:id="@+id/text_view_save_ski_place_title"
+        android:id="@+id/text_view_favourite_ski_place_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_1sdp"
@@ -15,6 +15,7 @@
         android:padding="@dimen/_4sdp"
         android:paddingStart="@dimen/_16sdp"
         android:text="@string/saved_ski_places"
+        android:textAlignment="center"
         android:textColor="@color/dark_grey"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,14 +23,14 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/save_recycler_view"
+        android:id="@+id/favourites_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/_1sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_save_ski_place_title"
+        app:layout_constraintTop_toBottomOf="@id/text_view_favourite_ski_place_title"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_save_ski_place" />
+        tools:listitem="@layout/item_favourite_ski_place" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,12 +11,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteSkiPlaceUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteFavouriteSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlacesUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetFavouriteSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlaceDetailsUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.AddFavouriteSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,11 +24,11 @@ import kotlinx.coroutines.withContext
 
 class SkiPlaceViewModel(
     app: Application,
-    private val deleteSkiPlaceUseCase: DeleteSkiPlaceUseCase,
+    private val deleteFavouriteSkiPlaceUseCase: DeleteFavouriteSkiPlaceUseCase,
     private val getSkiPlacesUseCase: GetSkiPlacesUseCase,
-    private val getSavedSkiPlacesUseCase: GetSavedSkiPlacesUseCase,
+    private val getFavouriteSkiPlacesUseCase: GetFavouriteSkiPlacesUseCase,
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
-    private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
+    private val addFavouriteSkiPlaceUseCase: AddFavouriteSkiPlaceUseCase,
     private val upsertUseCase: UpsertUseCase,
     private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase
 ) : AndroidViewModel(app) {
@@ -39,8 +39,8 @@ class SkiPlaceViewModel(
     private val _skiPlacesFilteredListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
     val skiPlacesFilteredListLoaded: LiveData<List<SkiPlace>> get() = _skiPlacesFilteredListLoaded
 
-    private val _skiSavedPlacesListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
-    val skiSavedPlacesListLoaded: LiveData<List<SkiPlace>> get() = _skiSavedPlacesListLoaded
+    private val _skiFavouritePlacesListLoaded: MutableLiveData<List<SkiPlace>> = MutableLiveData<List<SkiPlace>>()
+    val skiFavouritePlacesListLoaded: LiveData<List<SkiPlace>> get() = _skiFavouritePlacesListLoaded
 
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
@@ -54,9 +54,9 @@ class SkiPlaceViewModel(
         }
     }
 
-    fun saveSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
+    fun addFavouriteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            saveSkiPlacesUseCase.execute(skiPlace)
+            addFavouriteSkiPlaceUseCase.execute(skiPlace)
         }
     }
 
@@ -74,18 +74,18 @@ class SkiPlaceViewModel(
         }
     }
 
-    fun getAllSkiPlacesSaved() = viewModelScope.launch {
+    fun getFavouriteSkiPlaces() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val skiPlacesSaved = getSavedSkiPlacesUseCase.execute()
+            val skiPlacesSaved = getFavouriteSkiPlacesUseCase.execute()
             withContext(Dispatchers.Main) {
-                _skiSavedPlacesListLoaded.value = skiPlacesSaved
+                _skiFavouritePlacesListLoaded.value = skiPlacesSaved
             }
         }
     }
 
-    fun deleteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
+    fun deleteFavouriteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            deleteSkiPlaceUseCase.execute(skiPlace)
+            deleteFavouriteSkiPlaceUseCase.execute(skiPlace)
         }
     }
 
@@ -95,10 +95,10 @@ class SkiPlaceViewModel(
         }
     }
 
-    fun saveCurrentSkiPlace() = viewModelScope.launch {
+    fun addCurrentSkiPlaceToFavourites() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val skiPlaceSaved = _skiPlaceDetailLoaded.value
-            skiPlaceSaved?.let { saveSkiPlacesUseCase.execute(skiPlaceSaved) }
+            val currentSkiPlace = _skiPlaceDetailLoaded.value
+            currentSkiPlace?.let { addFavouriteSkiPlaceUseCase.execute(currentSkiPlace) }
         }
     }
 
