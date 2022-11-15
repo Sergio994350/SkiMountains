@@ -65,7 +65,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:backgroundTint="@color/sky_blue"
+                    android:backgroundTint="@color/sky_light_blue"
                     android:clickable="true"
                     android:contentDescription="@string/how_to_get_title"
                     android:elevation="@dimen/_4sdp"
@@ -82,7 +82,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:backgroundTint="@color/sky_blue"
+                    android:backgroundTint="@color/sky_light_blue"
                     android:clickable="true"
                     android:contentDescription="@string/web_cite"
                     android:elevation="@dimen/_4sdp"
@@ -99,7 +99,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:backgroundTint="@color/sky_blue"
+                    android:backgroundTint="@color/sky_light_blue"
                     android:clickable="true"
                     android:contentDescription="@string/web_camera"
                     android:elevation="@dimen/_4sdp"
@@ -115,7 +115,7 @@
                     android:id="@+id/btn_play_youtube_details"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_44sdp"
-                    android:backgroundTint="@color/sky_blue"
+                    android:backgroundTint="@color/sky_light_blue"
                     android:clickable="true"
                     android:contentDescription="@string/see_video_on_youtube"
                     android:elevation="@dimen/_4sdp"
@@ -138,7 +138,7 @@
                 android:fontFamily="@font/quicksand_regular"
                 android:text="@string/abzakovo"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_17ssp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_button_row_details" />
 
@@ -150,7 +150,7 @@
                 android:fontFamily="@font/quicksand_regular"
                 android:text="@string/ural"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_15ssp"
                 app:layout_constraintLeft_toLeftOf="@+id/name_ski_place_details"
                 app:layout_constraintTop_toBottomOf="@+id/name_ski_place_details" />
 
@@ -158,26 +158,25 @@
                 android:id="@+id/technical_data_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:fontFamily="@font/quicksand_regular"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_18sdp"
                 android:text="@string/technical_data"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_13ssp"
                 app:layout_constraintTop_toBottomOf="@+id/region_category_details" />
 
             <TextView
                 android:id="@+id/description_data_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
                 android:fontFamily="@font/quicksand_regular"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_18sdp"
                 android:text="@string/description_data"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_13ssp"
                 app:layout_constraintLeft_toLeftOf="@+id/technical_data_details"
                 app:layout_constraintTop_toBottomOf="@+id/technical_data_details" />
 
@@ -185,13 +184,12 @@
                 android:id="@+id/geo_data_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_18sdp"
                 android:fontFamily="@font/quicksand_regular"
                 android:text="@string/geo_data"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_13ssp"
                 app:layout_constraintLeft_toLeftOf="@+id/description_data_details"
                 app:layout_constraintTop_toBottomOf="@+id/description_data_details" />
 
