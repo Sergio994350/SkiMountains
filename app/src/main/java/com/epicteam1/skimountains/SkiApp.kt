@@ -1,6 +1,7 @@
 package com.epicteam1.skimountains
 
 import android.app.Application
+import android.content.Context
 import com.epicteam1.skimountains.feature_auth.di.featureAuthDataModule
 import com.epicteam1.skimountains.feature_auth.di.featureAuthDomainModule
 import com.epicteam1.skimountains.feature_auth.di.featureAuthPresentationModule
@@ -14,11 +15,25 @@ class SkiApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        mInstance = this
 
         startKoin {
             androidContext(this@SkiApp)
-            modules(featureSkiPlacesDataModule, featureSkiPlacesDomainModule, featureSkiPlacesPresentationModule,
-            featureAuthDataModule, featureAuthDomainModule, featureAuthPresentationModule)
+            modules(
+                featureSkiPlacesDataModule,
+                featureSkiPlacesDomainModule,
+                featureSkiPlacesPresentationModule,
+                featureAuthDataModule,
+                featureAuthDomainModule,
+                featureAuthPresentationModule
+            )
+        }
+    }
+
+    companion object {
+        lateinit var mInstance: SkiApp
+        fun getContext(): Context {
+            return mInstance.applicationContext
         }
     }
 }

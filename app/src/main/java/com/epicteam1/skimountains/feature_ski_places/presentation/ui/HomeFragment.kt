@@ -14,9 +14,9 @@ import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentHomeBinding
 import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.DETAILS
-import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACES_RELOAD
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SKI_PLACE_SAVED
 import com.epicteam1.skimountains.feature_ski_places.core.EMPTY
+import com.epicteam1.skimountains.feature_ski_places.core.Util
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.adapter.SkiPlacesAdapter
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
@@ -55,9 +55,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val filterString: String = binding.searchSkiPlace.editText?.text.toString()
         loadSkiPlacesList(filterString = filterString)
     }
+
     private fun setObservers() {
         skiPlaceViewModel.skiPlacesListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesList)
-        skiPlaceViewModel.skiPlacesFilteredListLoaded.observe(viewLifecycleOwner, ::updateSkiPlacesList)
+        skiPlaceViewModel.skiPlacesFilteredListLoaded.observe(
+            viewLifecycleOwner,
+            ::updateSkiPlacesList
+        )
     }
 
     private fun updateSkiPlacesList(skiPlaces: List<SkiPlace>) {
@@ -86,7 +90,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setAdapter() {
         skiPlacesAdapter = SkiPlacesAdapter(
             { skiPlace -> onSkiPlaceClick(skiPlace = skiPlace) },
-            { skiPlace -> onSkiPlaceSaveClick(skiPlace = skiPlace)})
+            { skiPlace -> onSkiPlaceSaveClick(skiPlace = skiPlace) })
         binding.rvSkiPlaces.adapter = skiPlacesAdapter
         binding.rvSkiPlaces.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -102,7 +106,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             skiPlaceViewModel.reloadSkiPlacesList()
             binding.searchSkiPlace.editText?.text?.clear()
             loadSkiPlacesList()
-            Toast.makeText(context, SKI_PLACES_RELOAD, Toast.LENGTH_SHORT).show()
         }
         binding.searchSkiPlace.setEndIconOnClickListener {
             val filterString: String = binding.searchSkiPlace.editText?.text.toString()
