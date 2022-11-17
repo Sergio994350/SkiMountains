@@ -27,6 +27,7 @@ import com.epicteam1.skimountains.feature_ski_places.core.getTechnicalDataRus
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.model.SkiPlaceHowToGetArgs
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
+import com.epicteam1.skimountains.feature_weather.core.WeatherConstants.CELCIUS
 import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -90,8 +91,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setWeather(weatherData: WeatherData) {
-        binding.tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString()
+        binding.tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString() + CELCIUS
         binding.imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
     }
 

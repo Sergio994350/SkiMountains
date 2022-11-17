@@ -7,4 +7,5 @@ object WeatherConstants {
     const val TODAY_WEATHER = "Сегодня"
     const val UNKNOWN_ERROR = "Неизвестная ошибка"
     const val LOCATION_ERROR = "Ошибка позиционирования, проверьте GPS"
+    const val CELCIUS = "°C"
 }
