@@ -1,4 +1,4 @@
-package com.epicteam1.skimountains.feature_weather.domain.weather
+package com.epicteam1.skimountains.feature_weather.domain.models
 
 import androidx.annotation.DrawableRes
 import com.epicteam1.skimountains.R

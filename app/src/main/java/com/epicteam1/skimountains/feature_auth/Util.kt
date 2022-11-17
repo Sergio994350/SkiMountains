@@ -1,4 +1,4 @@
-package com.epicteam1.skimountains.feature_ski_places.core
+package com.epicteam1.skimountains.feature_auth
 
 import android.content.Context
 import android.net.ConnectivityManager

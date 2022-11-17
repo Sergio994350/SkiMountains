@@ -1,4 +1,4 @@
-package com.epicteam1.skimountains.feature_weather.data.remote
+package com.epicteam1.skimountains.feature_weather.data.dto
 
 import com.squareup.moshi.Json
 

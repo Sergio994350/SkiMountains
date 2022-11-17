@@ -1,6 +1,5 @@
 package com.epicteam1.skimountains.feature_auth.presentation.viewModel
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +21,7 @@ import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOG_OUT_SUCC
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_EMPTY
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_NOT_MATCH
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SIGN_UP_SUCCESS
-import com.epicteam1.skimountains.feature_ski_places.core.Util
+import com.epicteam1.skimountains.feature_auth.Util
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

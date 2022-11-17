@@ -27,6 +27,7 @@ import com.epicteam1.skimountains.feature_ski_places.core.getTechnicalDataRus
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.model.SkiPlaceHowToGetArgs
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
+import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,6 +64,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private fun setObservers() {
         skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
         skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setHowToGetArgs)
+        skiPlaceViewModel.skiPlaceWeatherLoaded.observe(viewLifecycleOwner, ::setWeather)
     }
 
     private fun setOnClickListeners(view: View) {
@@ -86,6 +88,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 show()
             }
         }
+    }
+
+    private fun setWeather(weatherData: WeatherData) {
+        binding.tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString()
+        binding.imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
     }
 
     private fun setSkiPlaceData(skiPlace: SkiPlace) {

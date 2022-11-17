@@ -1,11 +1,11 @@
-package com.epicteam1.skimountains.feature_weather.data.mappers
+package com.epicteam1.skimountains.feature_weather.core
 
 import android.annotation.SuppressLint
-import com.epicteam1.skimountains.feature_weather.data.remote.WeatherDataDto
-import com.epicteam1.skimountains.feature_weather.data.remote.WeatherDto
-import com.epicteam1.skimountains.feature_weather.domain.weather.WeatherData
-import com.epicteam1.skimountains.feature_weather.domain.weather.WeatherInfo
-import com.epicteam1.skimountains.feature_weather.domain.weather.WeatherType
+import com.epicteam1.skimountains.feature_weather.data.dto.WeatherDataDto
+import com.epicteam1.skimountains.feature_weather.data.dto.WeatherDto
+import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
+import com.epicteam1.skimountains.feature_weather.domain.models.WeatherInfo
+import com.epicteam1.skimountains.feature_weather.domain.models.WeatherType
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

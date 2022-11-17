@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOAD_FROM_LOCAL_DATABASE
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.NO_INTERNET
-import com.epicteam1.skimountains.feature_ski_places.core.Util
+import com.epicteam1.skimountains.feature_auth.Util
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
@@ -18,6 +18,8 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
+import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
+import com.epicteam1.skimountains.feature_weather.domain.usecases.GetWeatherUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -30,7 +32,9 @@ class SkiPlaceViewModel(
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
     private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
     private val upsertUseCase: UpsertUseCase,
-    private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase
+    private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase,
+    private val getWeatherUseCase: GetWeatherUseCase
+
 ) : AndroidViewModel(app) {
 
     private val _skiPlacesListLoaded: MutableLiveData<List<SkiPlace>> =
@@ -48,11 +52,19 @@ class SkiPlaceViewModel(
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
 
+    private val _skiPlaceWeatherLoaded: MutableLiveData<WeatherData> = MutableLiveData<WeatherData>()
+    val skiPlaceWeatherLoaded: LiveData<WeatherData> get() = _skiPlaceWeatherLoaded
+
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
+            val skiPlaceWeather = getWeatherUseCase.execute(
+                skiPlaceDetails.latitude,
+                skiPlaceDetails.longitude
+            )
             withContext(Dispatchers.Main) {
                 _skiPlaceDetailLoaded.value = skiPlaceDetails
+                _skiPlaceWeatherLoaded.value = skiPlaceWeather?.let { skiPlaceWeather }
             }
         }
     }
