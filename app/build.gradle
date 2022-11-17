@@ -57,8 +57,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
 
-    // Glide and Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    // Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
 
@@ -94,10 +93,17 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:3.6.1'
 
-    //koin
+    // koin
     implementation "io.insert-koin:koin-android:3.2.3"
     implementation "io.insert-koin:koin-android-compat:3.2.3"
     implementation "io.insert-koin:koin-core:3.2.2"
     implementation "io.insert-koin:koin-android-ext:3.0.2"
 
+    // Location Services
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
 }
