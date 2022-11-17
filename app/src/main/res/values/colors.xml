@@ -19,6 +19,9 @@
     <color name="green">#BC006100</color>
     <color name="blue">#BC0028A1</color>
     <color name="red">#BCB60000</color>
+    <color name="tr_darker">#1D000000</color>
+    <color name="tr_glass">#00000000</color>
+    <color name="bg_dark">#ff000000</color>
 
     <color name="orange">#DB3022</color>
 </resources>
