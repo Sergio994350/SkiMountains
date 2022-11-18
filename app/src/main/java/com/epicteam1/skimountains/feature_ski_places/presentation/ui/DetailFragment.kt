@@ -93,7 +93,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     @SuppressLint("SetTextI18n")
     private fun setWeather(weatherData: WeatherData) {
-        binding.tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString() + CELCIUS
+        binding.tvWeatherTempDetails.text =
+            context?.let { weatherData.temperatureCelsius.toString() + CELCIUS }
         binding.imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
     }
 
@@ -101,6 +102,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         Glide.with(this).load(skiPlace.mainPic).into(binding.imageSkiPlaceBigDetails)
         binding.nameSkiPlaceDetails.text = skiPlace.nameRus
         binding.regionCategoryDetails.text = skiPlace.regionRus
+        binding.tvRegionBigDetails.text = skiPlace.regionBig
         binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
         binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
         binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }

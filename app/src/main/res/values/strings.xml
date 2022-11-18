@@ -10,9 +10,10 @@
 
     <string name="main_screen_title">Горнолыжные курорты России</string>
     <string name="ural">Урал</string>
+    <string name="bashkortostan">Башкортостан</string>
     <string name="popular_places">Популярные места</string>
     <string name="subtitle_main_rv">Популярные места</string>
-    <string name="abzakovo">Абзаково, Башкортостан</string>
+    <string name="abzakovo">Абзаково</string>
     <string name="search_ski_place">Поиск курорта</string>
     <string name="saved_ski_places">Сохраненные курорты</string>
     <string name="abzakovo_web_cite">https://abzakovo.com</string>

@@ -52,20 +52,35 @@ class SkiPlaceViewModel(
     private val _skiPlaceDetailLoaded: MutableLiveData<SkiPlace> = MutableLiveData<SkiPlace>()
     val skiPlaceDetailLoaded: LiveData<SkiPlace> get() = _skiPlaceDetailLoaded
 
-    private val _skiPlaceWeatherLoaded: MutableLiveData<WeatherData> = MutableLiveData<WeatherData>()
+    private val _skiPlaceWeatherLoaded: MutableLiveData<WeatherData> =
+        MutableLiveData<WeatherData>()
     val skiPlaceWeatherLoaded: LiveData<WeatherData> get() = _skiPlaceWeatherLoaded
 
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
-            val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
-            val skiPlaceWeather = getWeatherUseCase.execute(
-                skiPlaceDetails.latitude,
-                skiPlaceDetails.longitude
-            )
-            withContext(Dispatchers.Main) {
-                _skiPlaceDetailLoaded.value = skiPlaceDetails
-                _skiPlaceWeatherLoaded.value = skiPlaceWeather?.let { skiPlaceWeather }
+        try {
+            if (Util.hasInternetConnection(getApplication())) {
+                withContext(Dispatchers.IO) {
+                    val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
+                    val skiPlaceWeather = getWeatherUseCase.execute(
+                        skiPlaceDetails.latitude,
+                        skiPlaceDetails.longitude
+                    )
+                    withContext(Dispatchers.Main) {
+                        _skiPlaceDetailLoaded.value = skiPlaceDetails
+                        _skiPlaceWeatherLoaded.value = skiPlaceWeather?.let { skiPlaceWeather }
+                    }
+                }
+            } else {
+                Toast.makeText(getApplication(), NO_INTERNET, Toast.LENGTH_SHORT).show()
+                withContext(Dispatchers.IO) {
+                    val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
+                    withContext(Dispatchers.Main) {
+                        _skiPlaceDetailLoaded.value = skiPlaceDetails
+                    }
+                }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
