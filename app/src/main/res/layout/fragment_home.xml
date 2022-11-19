@@ -80,9 +80,18 @@
                     android:id="@+id/iv_refresh_home"
                     android:layout_width="@dimen/_23sdp"
                     android:layout_height="@dimen/_23sdp"
-                    android:layout_marginStart="@dimen/_96sdp"
+                    android:layout_marginStart="@dimen/_65sdp"
                     android:contentDescription="@string/refresh_data"
                     android:src="@drawable/ic_refresh_24" />
+
+                <ImageView
+                    android:id="@+id/iv_sort_home"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:contentDescription="@string/sorting"
+                    android:src="@drawable/ic_arrows_up_down" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

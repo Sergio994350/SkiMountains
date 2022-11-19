@@ -26,6 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var sortOrder = 0
     private lateinit var skiPlacesAdapter: SkiPlacesAdapter
     private val skiPlaceViewModel by viewModel<SkiPlaceViewModel>()
 
@@ -103,6 +104,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             skiPlaceViewModel.reloadSkiPlacesList()
             binding.searchSkiPlace.editText?.text?.clear()
             loadSkiPlacesList()
+        }
+        binding.ivSortHome.setOnClickListener {
+            // TODO
         }
         binding.searchSkiPlace.setEndIconOnClickListener {
             val filterString: String = binding.searchSkiPlace.editText?.text.toString()

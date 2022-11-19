@@ -74,4 +74,6 @@ object Constants {
     const val PASSWORD_NOT_MATCH = 3
 
     const val SPLASH_DELAY = 2000L
+    const val SORT_ASC = 0
+    const val SORT_DESC = 1
 }
