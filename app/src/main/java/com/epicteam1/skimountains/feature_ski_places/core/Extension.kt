@@ -133,16 +133,4 @@ fun SkiPlace.getDescriptionDataRus(context: Context) : String {
 
 fun SkiPlace.getExtendedName() = "$nameRus $regionRus"
 
-fun SkiPlace.isMatchedByNameOrRegion(filterString: String): Boolean {
-
-    val isMatchedByName = nameRus.startsWith(filterString, true)
-        || nameEng.startsWith(filterString, true)
-
-    val isMMatchedByRegion = regionRus.startsWith(filterString, true)
-        || regionEng.startsWith(filterString, true)
-        || regionBig.startsWith(filterString, true)
-
-    return isMMatchedByRegion || isMatchedByName
-}
-
 val String.Companion.EMPTY:String get() = ""

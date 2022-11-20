@@ -26,7 +26,10 @@ class SkiPlaceRepositoryImpl(
         skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
     }
 
-    override suspend fun getAllSkiPlaces(): List<SkiPlace> {
+    override suspend fun getAllSkiPlaces(filterString: String): List<SkiPlace> {
+        if (filterString.isNotEmpty()) {
+            return skiDatabase.getSkiDao().getFilteredSkiPlaces(filterString = filterString).map { it.toSkiPlace() }
+        }
         val localSkiPlaces = skiDatabase.getSkiDao().getAllSkiPlaces().map { it.toSkiPlace() }
         if (localSkiPlaces.isEmpty()) {
             val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)

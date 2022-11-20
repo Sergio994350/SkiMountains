@@ -17,7 +17,8 @@ val featureSkiPlacesPresentationModule = module {
             saveSkiPlacesUseCase = get(),
             upsertUseCase = get(),
             reloadSkiPlacesUseCase = get(),
-            getWeatherUseCase = get()
+            getWeatherUseCase = get(),
+            sortSkiPlaceListUseCase = get()
         )
     }
 }

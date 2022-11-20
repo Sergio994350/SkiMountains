@@ -17,6 +17,7 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
+import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SortSkiPlaceListUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
 import com.epicteam1.skimountains.feature_weather.domain.usecases.GetWeatherUseCase
@@ -33,17 +34,13 @@ class SkiPlaceViewModel(
     private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
     private val upsertUseCase: UpsertUseCase,
     private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase,
-    private val getWeatherUseCase: GetWeatherUseCase
-
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val sortSkiPlaceListUseCase: SortSkiPlaceListUseCase
 ) : AndroidViewModel(app) {
 
     private val _skiPlacesListLoaded: MutableLiveData<List<SkiPlace>> =
         MutableLiveData<List<SkiPlace>>()
     val skiPlacesListLoaded: LiveData<List<SkiPlace>> get() = _skiPlacesListLoaded
-
-    private val _skiPlacesFilteredListLoaded: MutableLiveData<List<SkiPlace>> =
-        MutableLiveData<List<SkiPlace>>()
-    val skiPlacesFilteredListLoaded: LiveData<List<SkiPlace>> get() = _skiPlacesFilteredListLoaded
 
     private val _skiSavedPlacesListLoaded: MutableLiveData<List<SkiPlace>> =
         MutableLiveData<List<SkiPlace>>()
@@ -55,6 +52,8 @@ class SkiPlaceViewModel(
     private val _skiPlaceWeatherLoaded: MutableLiveData<WeatherData> =
         MutableLiveData<WeatherData>()
     val skiPlaceWeatherLoaded: LiveData<WeatherData> get() = _skiPlaceWeatherLoaded
+
+    private var sortOrderAsc = true
 
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
         try {
@@ -90,12 +89,26 @@ class SkiPlaceViewModel(
         }
     }
 
-    fun getSkiPlaces(filterString: String) {
-        if (filterString.isEmpty()) {
-            getAllSkiPlaces()
-        } else {
-            getFilteredSkiPlaces(filterString = filterString)
+    fun getSkiPlaces(filterString: String) = viewModelScope.launch {
+        try {
+            val skiPlaces = getSkiPlacesUseCase.execute(filterString = filterString)
+            withContext(Dispatchers.Main) {
+                _skiPlacesListLoaded.value = skiPlaces
+            }
+            if (!Util.hasInternetConnection(getApplication())) {
+                Toast.makeText(getApplication(), NO_INTERNET, Toast.LENGTH_SHORT).show()
+                Toast.makeText(getApplication(), LOAD_FROM_LOCAL_DATABASE, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+    }
+
+    fun sortList() {
+        sortOrderAsc = !sortOrderAsc
+        val sortedSkiPlaceList = sortSkiPlaceListUseCase.execute(_skiPlacesListLoaded.value, sortOrderAsc)
+        _skiPlacesListLoaded.value = sortedSkiPlaceList
     }
 
     fun reloadSkiPlacesList() = viewModelScope.launch {
@@ -139,30 +152,6 @@ class SkiPlaceViewModel(
         withContext(Dispatchers.IO) {
             val skiPlaceSaved = _skiPlaceDetailLoaded.value
             skiPlaceSaved?.let { saveSkiPlacesUseCase.execute(skiPlaceSaved) }
-        }
-    }
-
-    private fun getFilteredSkiPlaces(filterString: String) = viewModelScope.launch {
-        val currentSkiPlacesList = skiPlacesListLoaded.value ?: emptyList()
-        val skiPlaces = getSkiPlacesUseCase.execute(filterString, currentSkiPlacesList)
-        withContext(Dispatchers.Main) {
-            _skiPlacesFilteredListLoaded.value = skiPlaces
-        }
-    }
-
-    private fun getAllSkiPlaces() = viewModelScope.launch {
-        try {
-            val skiPlaces = getSkiPlacesUseCase.execute()
-            withContext(Dispatchers.Main) {
-                _skiPlacesListLoaded.value = skiPlaces
-            }
-            if (!Util.hasInternetConnection(getApplication())) {
-                Toast.makeText(getApplication(), NO_INTERNET, Toast.LENGTH_SHORT).show()
-                Toast.makeText(getApplication(), LOAD_FROM_LOCAL_DATABASE, Toast.LENGTH_SHORT)
-                    .show()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 }
