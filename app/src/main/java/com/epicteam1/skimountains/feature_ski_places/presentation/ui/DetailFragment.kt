@@ -27,6 +27,8 @@ import com.epicteam1.skimountains.feature_ski_places.core.getTechnicalDataRus
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.presentation.model.SkiPlaceHowToGetArgs
 import com.epicteam1.skimountains.feature_ski_places.presentation.viewModel.SkiPlaceViewModel
+import com.epicteam1.skimountains.feature_weather.core.WeatherConstants.CELCIUS
+import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,6 +65,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private fun setObservers() {
         skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
         skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setHowToGetArgs)
+        skiPlaceViewModel.skiPlaceWeatherLoaded.observe(viewLifecycleOwner, ::setWeather)
     }
 
     private fun setOnClickListeners(view: View) {
@@ -88,10 +91,18 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun setWeather(weatherData: WeatherData) {
+        binding.tvWeatherTempDetails.text =
+            context?.let { weatherData.temperatureCelsius.toString() + CELCIUS }
+        binding.imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
+    }
+
     private fun setSkiPlaceData(skiPlace: SkiPlace) {
         Glide.with(this).load(skiPlace.mainPic).into(binding.imageSkiPlaceBigDetails)
         binding.nameSkiPlaceDetails.text = skiPlace.nameRus
         binding.regionCategoryDetails.text = skiPlace.regionRus
+        binding.tvRegionBigDetails.text = skiPlace.regionBig
         binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
         binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
         binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }

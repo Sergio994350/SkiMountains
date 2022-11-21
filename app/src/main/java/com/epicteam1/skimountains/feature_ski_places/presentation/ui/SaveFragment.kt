@@ -71,6 +71,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
                     }.setAction(UNDO) {
                         skiPlaceViewModel.saveSkiPlace(place)
                         skiPlaceViewModel.getAllSkiPlacesSaved()
+                        findNavController().navigate(R.id.action_save_to_home)
                     }
                 }
             }

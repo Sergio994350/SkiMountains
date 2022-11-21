@@ -11,13 +11,18 @@ import com.epicteam1.skimountains.feature_ski_places.data.local.entities.SkiPlac
 @Dao
 interface SkiDao {
 
-    @Query("SELECT * FROM ski_place_table")
+    @Query("SELECT * FROM ski_place_table ORDER BY nameRus")
     suspend fun getAllSkiPlaces(): List<SkiPlaceEntity>
+
+    @Query("SELECT * FROM ski_place_table WHERE (lower(nameRus) LIKE '' || :filterString || '%') OR" +
+        " (lower(nameEng) LIKE '' || :filterString || '%') OR (lower(regionBig) LIKE '' || :filterString || '%') OR " +
+        "(lower(regionRus) LIKE '' || :filterString || '%') OR (lower(regionEng) LIKE '' || :filterString || '%') ORDER BY nameRus")
+    suspend fun getFilteredSkiPlaces(filterString: String): List<SkiPlaceEntity>
 
     @Query("SELECT * FROM ski_place_table WHERE skiPlaceId = :skiPlaceEntityId")
     suspend fun getSkiPlaceById(skiPlaceEntityId: String): SkiPlaceEntity
 
-    @Query("SELECT * FROM ski_place_table WHERE isSaved = $SAVED")
+    @Query("SELECT * FROM ski_place_table WHERE isSaved = $SAVED ORDER BY nameRus")
     suspend fun getSkiPlacesSavedList(): List<SkiPlaceEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

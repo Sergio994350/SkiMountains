@@ -1,20 +1,21 @@
 package com.epicteam1.skimountains.feature_ski_places.core
 
 object Constants {
-    const val FIREBASE_COLLECTION_NAME = "ski_place_database"
+    const val FIREBASE_COLLECTION_NAME = "ski_places_2"
     const val LOCAL_DATABASE_NAME = "ski_place_local_db.db"
     const val ENTITY = "entity"
     const val SKI_PLACE = "SkiPlace"
     const val CATEGORY = "Category"
     const val SAVED = "1"
     const val NOT_SAVED = "0"
-    const val NO_INTERNET = "No internet connection!"
+    const val NO_INTERNET = "Нет подключения к интернету"
+    const val LOAD_FROM_LOCAL_DATABASE = "Загрузка из локальной базы"
     const val SUCCESS = "Success"
     const val DETAILS = "details"
     const val HOW_TO_GET_ARGS = "how_to_get_args"
-    const val SKI_PLACE_DELETED = "Ski Place Deleted"
-    const val SKI_PLACE_SAVED = "Ski Place Saved"
-    const val UNDO = "undo"
+    const val SKI_PLACE_DELETED = "Курорт удален"
+    const val SKI_PLACE_SAVED = "Курорт сохранен"
+    const val UNDO = "отменить"
     const val HAS_NIGHTRIDE = "true"
     const val HAS_RAILWAY = "true"
     const val LOG_OUT = "Выйти"
@@ -23,10 +24,10 @@ object Constants {
     const val LOG_OUT_SUCCESS = "Успешный выход"
     const val LOG_IN_SUCCESS = "Успешный вход"
     const val EMAIL_HAS_SEND = "Email отправлен"
-    const val CANNOT_SEND_PASSWORD_RESET = "cannot send password reset"
+    const val CANNOT_SEND_PASSWORD_RESET = "сброс пароля не отправлен"
     const val SIGN_UP_SUCCESS = "Пользователь зарегистрирован"
-    const val EMPTY_EMAIL_MESSAGE = "email should not be empty!"
-    const val LOGOUT_FAILURE_MESSAGE = "logout failure"
+    const val EMPTY_EMAIL_MESSAGE = "email должен быть заполнен"
+    const val LOGOUT_FAILURE_MESSAGE = "ошибка выхода"
     const val NO_YOUTUBE_LINK = "Видео на YouTube недоступно"
     const val NO_WEB_CITE = "Web-сайт недоступен"
     const val NO_WEB_CAMERAS = "Web-камеры недоступны"
@@ -73,4 +74,6 @@ object Constants {
     const val PASSWORD_NOT_MATCH = 3
 
     const val SPLASH_DELAY = 2000L
+    const val SORT_ASC = 0
+    const val SORT_DESC = 1
 }

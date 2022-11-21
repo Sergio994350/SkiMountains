@@ -1,34 +1,35 @@
 <resources>
     <string name="app_name">SkiMountains</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_save">Save</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_home">Главная</string>
+    <string name="title_save">Избранное</string>
+    <string name="title_profile">Профиль</string>
     <string name="title_detail">Detail</string>
     <string name="title_sign_up">Sign Up</string>
     <string name="title_sign_in">Sign In</string>
 
     <string name="main_screen_title">Горнолыжные курорты России</string>
     <string name="ural">Урал</string>
+    <string name="bashkortostan">Башкортостан</string>
     <string name="popular_places">Популярные места</string>
     <string name="subtitle_main_rv">Популярные места</string>
-    <string name="abzakovo">Абзаково, Башкортостан</string>
+    <string name="abzakovo">Абзаково</string>
     <string name="search_ski_place">Поиск курорта</string>
     <string name="saved_ski_places">Сохраненные курорты</string>
     <string name="abzakovo_web_cite">https://abzakovo.com</string>
     <string name="abzakovo_web_cameras">https://abzakovo.com/glc/camera/</string>
     <string name="web_camera">Web-camera</string>
-    <string name="technical_data">Перепад высот: %1s м, максимальная высота: %2s м, общая длина трасс: %3s км, максимальная длина одной трассы: %4s км,\nТрассы: зеленые: %5s, синие: %6s, красные: %7s, черные: %8s</string>
-    <string name="description_data">Подъемники бугельные: %1s, кресельные: %2s, кабины: %3s. Начало сезона: %4s, конец сезона: %5s.\nЖ/д станция рядом: %6s, ночное катание: %7s</string>
-    <string name="geo_data">Города рядом: %1s.\n Координаты: %2s, %3s</string>
+    <string name="technical_data">Перепад высот: %1s м, \nмаксимальная высота: %2s м, \nобщая длина трасс: %3s км, \nмакс. длина трассы: %4s км,\nТрассы: зеленые%5s, синие%6s, красные%7s, черные%8s</string>
+    <string name="description_data">Подъемники: \nбугельные %1s, кресельные %2s, кабины %3s. \nНачало сезона: %4s, конец сезона: %5s\nж/д станция рядом:%6s, \nночное катание:%7s</string>
+    <string name="geo_data">Города рядом: %1s\nКоординаты: %2s, %3s</string>
     <string name="how_to_get_title">Как добраться:</string>
     <string name="how_to_get_abzakovo">Оздоровительно-спортивный комплекс Абзаково расположен в отрогах Уральских гор на юго-востоке Башкирии. Добраться до Абзаково не сложно. Для начала необходимо доехать до города Магнитогорск, это можно сделать на поезде (крупные железнодорожные узлы расположены в Магнитогорске и Белорецке, в Новоабзаково есть железнодорожная станция) или на самолёте (аэропорт Магнитогорска находится примерно в 60 км от Абзаково). Кроме Магнитогорска в радиусе 600 км. от Абзаково расположены города Белорецк (27 км), Уфа (290 км), Челябинск (370 км), Иркутск (580 км).</string>
     <string name="see_video_on_youtube">See video on YouTube</string>
     <string name="galochka_v_kvadrate">☑</string>
     <string name="krestik_v_kvadrate">☒</string>
     <string name="okruzhnost">●</string>
-    <string name="ski_places_app">Ski Places App</string>
-    <string name="version_1_0">Version 1.0</string>
+    <string name="ski_places_app">Ski Mountains App</string>
+    <string name="version_1_0">Version 1.3</string>
     <string name="my_profile">Профиль</string>
     <string name="web_cite">Web-cite</string>
     <string name="refresh_data">Refresh Data</string>
@@ -45,4 +46,6 @@
     <string name="change_password">Сбросить пароль</string>
     <string name="reset_password_email">Сброс пароля (e-mail)</string>
     <string name="email_not_found">email не задан</string>
+    <string name="temperature">-2°C</string>
+    <string name="sorting">Сортировка</string>
 </resources>

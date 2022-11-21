@@ -131,6 +131,11 @@
             app:destination="@id/details"
             app:popUpTo="@id/details"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_save_to_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_save"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

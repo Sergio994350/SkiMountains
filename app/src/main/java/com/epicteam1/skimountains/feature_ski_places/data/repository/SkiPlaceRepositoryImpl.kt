@@ -1,11 +1,11 @@
 package com.epicteam1.skimountains.feature_ski_places.data.repository
 
-import com.epicteam1.skimountains.feature_ski_places.data.local.database.SkiDatabase
-import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.toSkiPlace
 import com.epicteam1.skimountains.feature_ski_places.core.toSkiPlaceEntity
+import com.epicteam1.skimountains.feature_ski_places.data.local.database.SkiDatabase
 import com.epicteam1.skimountains.feature_ski_places.data.network.FirebaseDataSource
+import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.repository.SkiPlaceRepository
 
 class SkiPlaceRepositoryImpl(
@@ -26,17 +26,22 @@ class SkiPlaceRepositoryImpl(
         skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
     }
 
-    override suspend fun getAllSkiPlaces(): List<SkiPlace> {
-        val localSkiPlaces = skiDatabase.getSkiDao().getAllSkiPlaces().map {it.toSkiPlace()}
+    override suspend fun getAllSkiPlaces(filterString: String): List<SkiPlace> {
+        if (filterString.isNotEmpty()) {
+            return skiDatabase.getSkiDao().getFilteredSkiPlaces(filterString = filterString).map { it.toSkiPlace() }
+        }
+        val localSkiPlaces = skiDatabase.getSkiDao().getAllSkiPlaces().map { it.toSkiPlace() }
         if (localSkiPlaces.isEmpty()) {
-            val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME).map { it.toSkiPlace() }
+            val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)
+                .map { it.toSkiPlace() }
             skiDatabase.getSkiDao().insertList(skiPlaces.map { it.toSkiPlaceEntity() })
             return skiPlaces
         }
         return localSkiPlaces
     }
 
-    override suspend fun getAllSkiPlacesSaved() = skiDatabase.getSkiDao().getSkiPlacesSavedList().map { it.toSkiPlace() }
+    override suspend fun getAllSkiPlacesSaved() =
+        skiDatabase.getSkiDao().getSkiPlacesSavedList().map { it.toSkiPlace() }
 
     override suspend fun deleteSkiPlace(skiPlace: SkiPlace) {
         if (skiPlace.isSaved == Constants.SAVED) {
@@ -47,7 +52,8 @@ class SkiPlaceRepositoryImpl(
 
     override suspend fun reloadSkiPlaces() {
         skiDatabase.getSkiDao().deleteAllRecords()
-        val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME).map { it.toSkiPlace() }
+        val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)
+            .map { it.toSkiPlace() }
         skiDatabase.getSkiDao().insertList(skiPlaces.map { it.toSkiPlaceEntity() })
     }
 }

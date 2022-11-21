@@ -1,14 +1,17 @@
 package com.epicteam1.skimountains.feature_auth.presentation.viewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.epicteam1.skimountains.SkiApp
 import com.epicteam1.skimountains.feature_auth.domain.usecases.GetCurrentUserUseCase
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SendResetPasswordUseCase
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SignInWithEmailPasswordUseCase
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SignOutUseCase
 import com.epicteam1.skimountains.feature_auth.domain.usecases.SignUpWithEmailPasswordUseCase
+import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.CANNOT_SEND_PASSWORD_RESET
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMAIL_EMPTY
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.EMAIL_HAS_SEND
@@ -18,6 +21,7 @@ import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOG_OUT_SUCC
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_EMPTY
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.PASSWORD_NOT_MATCH
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.SIGN_UP_SUCCESS
+import com.epicteam1.skimountains.feature_auth.Util
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -48,6 +52,9 @@ class AuthViewModel(
                 eventsChannel.send(AllEvents.ErrorCode(PASSWORD_EMPTY))
             }
             else -> {
+                if (!Util.hasInternetConnection(SkiApp.getContext())) {
+                    Toast.makeText(SkiApp.getContext(), Constants.NO_INTERNET, Toast.LENGTH_SHORT).show()
+                }
                 actualSignInUser(email, password)
             }
         }
@@ -65,6 +72,9 @@ class AuthViewModel(
                 eventsChannel.send(AllEvents.ErrorCode(PASSWORD_NOT_MATCH))
             }
             else -> {
+                if (!Util.hasInternetConnection(SkiApp.getContext())) {
+                    Toast.makeText(SkiApp.getContext(), Constants.NO_INTERNET, Toast.LENGTH_SHORT).show()
+                }
                 actualSignUpUser(email, password)
             }
         }
@@ -72,6 +82,9 @@ class AuthViewModel(
 
     private fun actualSignInUser(email: String, password: String) = viewModelScope.launch {
         try {
+            if (!Util.hasInternetConnection(SkiApp.getContext())) {
+                Toast.makeText(SkiApp.getContext(), Constants.NO_INTERNET, Toast.LENGTH_SHORT).show()
+            }
             val user = signInWithEmailPasswordUseCase.execute(email, password)
             user?.let {
                 _firebaseUser.postValue(it)
@@ -86,6 +99,9 @@ class AuthViewModel(
 
     private fun actualSignUpUser(email: String, password: String) = viewModelScope.launch {
         try {
+            if (!Util.hasInternetConnection(SkiApp.getContext())) {
+                Toast.makeText(SkiApp.getContext(), Constants.NO_INTERNET, Toast.LENGTH_SHORT).show()
+            }
             val user = signUpWithEmailPasswordUseCase.execute(email, password)
             user?.let {
                 _firebaseUser.postValue(it)
@@ -115,6 +131,9 @@ class AuthViewModel(
     }
 
     fun getCurrentUser() = viewModelScope.launch {
+        if (!Util.hasInternetConnection(SkiApp.getContext())) {
+            Toast.makeText(SkiApp.getContext(), Constants.NO_INTERNET, Toast.LENGTH_SHORT).show()
+        }
         val user = getCurrentUserUseCase.execute()
         _firebaseUser.postValue(user)
     }
@@ -125,6 +144,9 @@ class AuthViewModel(
                 eventsChannel.send(AllEvents.ErrorCode(EMAIL_EMPTY))
             }
         } else {
+            if (!Util.hasInternetConnection(SkiApp.getContext())) {
+                Toast.makeText(SkiApp.getContext(), Constants.NO_INTERNET, Toast.LENGTH_SHORT).show()
+            }
             sendPasswordResetEmail(email)
         }
 
