@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">SkiMountains</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_save">Save</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_home">Главная</string>
+    <string name="title_save">Избранное</string>
+    <string name="title_profile">Профиль</string>
     <string name="title_detail">Detail</string>
     <string name="title_sign_up">Sign Up</string>
     <string name="title_sign_in">Sign In</string>
@@ -28,8 +28,8 @@
     <string name="galochka_v_kvadrate">☑</string>
     <string name="krestik_v_kvadrate">☒</string>
     <string name="okruzhnost">●</string>
-    <string name="ski_places_app">Ski Places App</string>
-    <string name="version_1_0">Version 1.0</string>
+    <string name="ski_places_app">Ski Mountains App</string>
+    <string name="version_1_0">Version 1.3</string>
     <string name="my_profile">Профиль</string>
     <string name="web_cite">Web-cite</string>
     <string name="refresh_data">Refresh Data</string>

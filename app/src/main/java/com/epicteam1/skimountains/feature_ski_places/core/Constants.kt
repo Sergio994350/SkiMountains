@@ -1,7 +1,7 @@
 package com.epicteam1.skimountains.feature_ski_places.core
 
 object Constants {
-    const val FIREBASE_COLLECTION_NAME = "ski_place_database"
+    const val FIREBASE_COLLECTION_NAME = "ski_places_2"
     const val LOCAL_DATABASE_NAME = "ski_place_local_db.db"
     const val ENTITY = "entity"
     const val SKI_PLACE = "SkiPlace"
