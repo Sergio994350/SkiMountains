@@ -93,8 +93,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     @SuppressLint("SetTextI18n")
     private fun setWeather(weatherData: WeatherData) {
-        binding.tvWeatherTempDetails.text =
-            context?.let { weatherData.temperatureCelsius.toString() + CELCIUS }
+        binding.tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString() + CELCIUS
         binding.imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
     }
 

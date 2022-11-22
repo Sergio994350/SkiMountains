@@ -20,8 +20,8 @@ class SkiPlaceRepositoryImpl(
     override suspend fun upsert(skiPlace: SkiPlace) = skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
 
     override suspend fun saveSkiPlace(skiPlace: SkiPlace) {
-        if (skiPlace.isSaved != Constants.SAVED) {
-            skiPlace.isSaved = Constants.SAVED
+        if (skiPlace.isSaved != Constants.PRE_SAVED) {
+            skiPlace.isSaved = Constants.PRE_SAVED
         }
         skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
     }
@@ -44,7 +44,7 @@ class SkiPlaceRepositoryImpl(
         skiDatabase.getSkiDao().getSkiPlacesSavedList().map { it.toSkiPlace() }
 
     override suspend fun deleteSkiPlace(skiPlace: SkiPlace) {
-        if (skiPlace.isSaved == Constants.SAVED) {
+        if (skiPlace.isSaved == Constants.PRE_SAVED) {
             skiPlace.isSaved = Constants.NOT_SAVED
         }
         skiDatabase.getSkiDao().deleteSkiPlace(skiPlace.toSkiPlaceEntity())

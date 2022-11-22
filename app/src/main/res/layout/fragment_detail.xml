@@ -59,9 +59,9 @@
                     android:text="@string/temperature"
                     android:textColor="@color/white"
                     android:shadowColor="@color/dark_grey"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="2"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="3"
                     android:textSize="@dimen/_14ssp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
@@ -77,9 +77,9 @@
                     android:text="@string/ural"
                     android:textColor="@color/white"
                     android:shadowColor="@color/dark_grey"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="2"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="3"
                     android:textSize="@dimen/_14ssp"
                     tools:ignore="RtlSymmetry" />
 
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -185,12 +185,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:fontFamily="@font/quicksand_semi_bold"
                 android:text="@string/abzakovo"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_16ssp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_button_row_details" />
 
@@ -209,13 +208,12 @@
                 android:id="@+id/technical_data_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_2sdp"
                 android:fontFamily="@font/quicksand_regular"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_18sdp"
                 android:text="@string/technical_data"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_11ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/region_category_details" />
 
@@ -228,7 +226,7 @@
                 android:paddingEnd="@dimen/_18sdp"
                 android:text="@string/description_data"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_11ssp"
                 app:layout_constraintLeft_toLeftOf="@+id/technical_data_details"
                 app:layout_constraintTop_toBottomOf="@+id/technical_data_details" />
 
@@ -241,7 +239,7 @@
                 android:paddingEnd="@dimen/_18sdp"
                 android:text="@string/geo_data"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_11ssp"
                 app:layout_constraintLeft_toLeftOf="@+id/description_data_details"
                 app:layout_constraintTop_toBottomOf="@+id/description_data_details" />
 

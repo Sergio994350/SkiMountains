@@ -17,7 +17,7 @@ class SkiApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        mInstance = this
+        instanceApp = this
 
         startKoin {
             androidContext(this@SkiApp)
@@ -35,9 +35,9 @@ class SkiApp : Application() {
     }
 
     companion object {
-        lateinit var mInstance: SkiApp
+        lateinit var instanceApp: SkiApp
         fun getContext(): Context {
-            return mInstance.applicationContext
+            return instanceApp.applicationContext
         }
     }
 }
