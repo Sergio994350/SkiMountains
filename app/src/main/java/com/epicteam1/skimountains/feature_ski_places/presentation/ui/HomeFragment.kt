@@ -84,9 +84,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         skiPlacesAdapter = SkiPlacesAdapter(
             { skiPlace -> onSkiPlaceClick(skiPlace = skiPlace) },
             { skiPlace -> onSkiPlaceSaveClick(skiPlace = skiPlace) })
-        binding.rvSkiPlaces.adapter = skiPlacesAdapter
-        binding.rvSkiPlaces.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        with(binding) {
+            rvSkiPlaces.adapter = skiPlacesAdapter
+            rvSkiPlaces.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     override fun onDestroyView() {
@@ -95,17 +97,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setFragmentListeners() {
-        binding.ivRefreshHome.setOnClickListener {
-            skiPlaceViewModel.reloadSkiPlacesList()
-            binding.searchSkiPlace.editText?.text?.clear()
-            loadSkiPlacesList()
-        }
-        binding.ivSortHome.setOnClickListener {
-            skiPlaceViewModel.sortList()
-        }
-        binding.searchSkiPlace.setEndIconOnClickListener {
-            val filterString: String = binding.searchSkiPlace.editText?.text.toString()
-            loadSkiPlacesList(filterString = filterString)
+        with(binding) {
+            ivRefreshHome.setOnClickListener {
+                skiPlaceViewModel.reloadSkiPlacesList()
+                binding.searchSkiPlace.editText?.text?.clear()
+                loadSkiPlacesList()
+            }
+            ivSortHome.setOnClickListener {
+                skiPlaceViewModel.sortList()
+            }
+            searchSkiPlace.setEndIconOnClickListener {
+                val filterString: String = binding.searchSkiPlace.editText?.text.toString()
+                loadSkiPlacesList(filterString = filterString)
+            }
         }
     }
 

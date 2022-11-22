@@ -22,7 +22,8 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SortSkiPlac
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
 import com.epicteam1.skimountains.feature_weather.domain.usecases.GetWeatherUseCase
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.MainCoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -36,7 +37,9 @@ class SkiPlaceViewModel(
     private val upsertUseCase: UpsertUseCase,
     private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase,
     private val getWeatherUseCase: GetWeatherUseCase,
-    private val sortSkiPlaceListUseCase: SortSkiPlaceListUseCase
+    private val sortSkiPlaceListUseCase: SortSkiPlaceListUseCase,
+    private val ioDispatcher: CoroutineDispatcher,
+    private val mainDispatcher: MainCoroutineDispatcher,
 ) : AndroidViewModel(app) {
 
     private val _skiPlacesListLoaded: MutableLiveData<List<SkiPlace>> =
@@ -59,22 +62,22 @@ class SkiPlaceViewModel(
     fun getSkiPlaceDetailsById(skiPlaceId: String) = viewModelScope.launch {
         try {
             if (Util.hasInternetConnection(getApplication())) {
-                withContext(Dispatchers.IO) {
+                withContext(ioDispatcher) {
                     val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
                     val skiPlaceWeather = getWeatherUseCase.execute(
                         skiPlaceDetails.latitude,
                         skiPlaceDetails.longitude
                     )
-                    withContext(Dispatchers.Main) {
+                    withContext(mainDispatcher) {
                         _skiPlaceDetailLoaded.value = skiPlaceDetails
                         _skiPlaceWeatherLoaded.value = skiPlaceWeather?.let { skiPlaceWeather }
                     }
                 }
             } else {
                 Toast.makeText(getApplication(), NO_INTERNET, Toast.LENGTH_SHORT).show()
-                withContext(Dispatchers.IO) {
+                withContext(ioDispatcher) {
                     val skiPlaceDetails = getSkiPlaceDetailsUseCase.execute(skiPlaceId)
-                    withContext(Dispatchers.Main) {
+                    withContext(mainDispatcher) {
                         _skiPlaceDetailLoaded.value = skiPlaceDetails
                     }
                 }
@@ -85,7 +88,7 @@ class SkiPlaceViewModel(
     }
 
     fun saveSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             saveSkiPlacesUseCase.execute(skiPlace)
         }
     }
@@ -93,7 +96,7 @@ class SkiPlaceViewModel(
     fun getSkiPlaces(filterString: String) = viewModelScope.launch {
         try {
             val skiPlaces = getSkiPlacesUseCase.execute(filterString = filterString)
-            withContext(Dispatchers.Main) {
+            withContext(mainDispatcher) {
                 _skiPlacesListLoaded.value = skiPlaces
             }
             if (!Util.hasInternetConnection(getApplication())) {
@@ -118,7 +121,7 @@ class SkiPlaceViewModel(
             if (Util.hasInternetConnection(getApplication())) {
                 Toast.makeText(getApplication(), Constants.SKI_PLACES_RELOAD, Toast.LENGTH_SHORT)
                     .show()
-                withContext(Dispatchers.IO) {
+                withContext(ioDispatcher) {
                     reloadSkiPlacesUseCase.execute()
                 }
             } else {
@@ -130,28 +133,28 @@ class SkiPlaceViewModel(
     }
 
     fun getAllSkiPlacesSaved() = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val skiPlacesSaved = getSavedSkiPlacesUseCase.execute()
-            withContext(Dispatchers.Main) {
+            withContext(mainDispatcher) {
                 _skiSavedPlacesListLoaded.value = skiPlacesSaved
             }
         }
     }
 
     fun deleteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             deleteSkiPlaceUseCase.execute(skiPlace)
         }
     }
 
     fun saveSkiPlaceSaved(skiPlace: SkiPlace) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             upsertUseCase.execute(skiPlace)
         }
     }
 
     fun saveCurrentSkiPlace() = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val skiPlaceSaved = _skiPlaceDetailLoaded.value
             skiPlaceSaved?.let { saveSkiPlacesUseCase.execute(skiPlaceSaved) }
         }
