@@ -10,6 +10,7 @@ import com.epicteam1.skimountains.feature_ski_places.core.Constants
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.LOAD_FROM_LOCAL_DATABASE
 import com.epicteam1.skimountains.feature_ski_places.core.Constants.NO_INTERNET
 import com.epicteam1.skimountains.feature_auth.Util
+import com.epicteam1.skimountains.feature_ski_places.core.Constants.SORT_LIST
 import com.epicteam1.skimountains.feature_ski_places.domain.model.SkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.DeleteSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSavedSkiPlacesUseCase
@@ -109,6 +110,7 @@ class SkiPlaceViewModel(
         sortOrderAsc = !sortOrderAsc
         val sortedSkiPlaceList = sortSkiPlaceListUseCase.execute(_skiPlacesListLoaded.value, sortOrderAsc)
         _skiPlacesListLoaded.value = sortedSkiPlaceList
+        Toast.makeText(getApplication(), SORT_LIST, Toast.LENGTH_SHORT).show()
     }
 
     fun reloadSkiPlacesList() = viewModelScope.launch {
