@@ -32,9 +32,11 @@ class HowToGetFragment : Fragment(R.layout.fragment_howtoget) {
     }
 
     private fun setHowToGetData(howToGetArgs: SkiPlaceHowToGetArgs) {
-        binding.tvSubtitleNameHowToGet.text = howToGetArgs.howToGetNameRus
-        binding.tvDescriptionHowToGet.text = howToGetArgs.howToGetText
-        binding.tvHowToGetGeoData.text = howToGetArgs.howToGetGeoData
+        with(binding) {
+            tvSubtitleNameHowToGet.text = howToGetArgs.howToGetNameRus
+            tvDescriptionHowToGet.text = howToGetArgs.howToGetText
+            tvHowToGetGeoData.text = howToGetArgs.howToGetGeoData
+        }
         Glide.with(this).load(howToGetArgs.howToGetPic).into(binding.imageViewHowToGet)
     }
 

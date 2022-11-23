@@ -63,67 +63,75 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun setObservers() {
-        skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
-        skiPlaceViewModel.skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setHowToGetArgs)
-        skiPlaceViewModel.skiPlaceWeatherLoaded.observe(viewLifecycleOwner, ::setWeather)
+        with(skiPlaceViewModel) {
+            skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setSkiPlaceData)
+            skiPlaceDetailLoaded.observe(viewLifecycleOwner, ::setHowToGetArgs)
+            skiPlaceWeatherLoaded.observe(viewLifecycleOwner, ::setWeather)
+        }
     }
 
     private fun setOnClickListeners(view: View) {
-        binding.cardViewBack.setOnClickListener {
-            findNavController().apply { popBackStack() }
-        }
-
-        binding.btnHowToGetDetails.setOnClickListener {
-            val bundle = Bundle().apply {
-                putSerializable(HOW_TO_GET_ARGS, howToGetArgs)
+        with(binding) {
+            cardViewBack.setOnClickListener {
+                findNavController().apply { popBackStack() }
             }
-            findNavController().navigate(R.id.action_details_to_how_to_get_fragment, bundle)
-        }
 
-        binding.cardViewSaveSkiPlaceDetails.setOnClickListener {
-            skiPlaceViewModel.saveCurrentSkiPlace()
-            Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
-                animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-                setBackgroundTint(Color.DKGRAY)
-                setTextColor(Color.WHITE)
-                show()
+            btnHowToGetDetails.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putSerializable(HOW_TO_GET_ARGS, howToGetArgs)
+                }
+                findNavController().navigate(R.id.action_details_to_how_to_get_fragment, bundle)
+            }
+
+            cardViewSaveSkiPlaceDetails.setOnClickListener {
+                skiPlaceViewModel.saveCurrentSkiPlace()
+                Snackbar.make(view, SKI_PLACE_SAVED, Snackbar.LENGTH_SHORT).apply {
+                    animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                    setBackgroundTint(Color.DKGRAY)
+                    setTextColor(Color.WHITE)
+                    show()
+                }
             }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setWeather(weatherData: WeatherData) {
-        binding.tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString() + CELCIUS
-        binding.imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
+        with(binding) {
+            tvWeatherTempDetails.text = weatherData.temperatureCelsius.toString() + CELCIUS
+            imageViewWeatherDetails.setImageResource(weatherData.weatherType.iconRes)
+        }
     }
 
     private fun setSkiPlaceData(skiPlace: SkiPlace) {
         Glide.with(this).load(skiPlace.mainPic).into(binding.imageSkiPlaceBigDetails)
-        binding.nameSkiPlaceDetails.text = skiPlace.nameRus
-        binding.regionCategoryDetails.text = skiPlace.regionRus
-        binding.tvRegionBigDetails.text = skiPlace.regionBig
-        binding.technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
-        binding.descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
-        binding.geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
-        binding.btnPlayYoutubeDetails.setOnClickListener {
-            if (skiPlace.youTubeLink.isNotBlank()) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.youTubeLink)))
-            } else {
-                Toast.makeText(context, NO_YOUTUBE_LINK, Toast.LENGTH_LONG).show()
+        with(binding) {
+            nameSkiPlaceDetails.text = skiPlace.nameRus
+            regionCategoryDetails.text = skiPlace.regionRus
+            tvRegionBigDetails.text = skiPlace.regionBig
+            technicalDataDetails.text = context?.let { skiPlace.getTechnicalDataRus(it) }
+            descriptionDataDetails.text = context?.let { skiPlace.getDescriptionDataRus(it) }
+            geoDataDetails.text = context?.let { skiPlace.getGeoDataRus(it) }
+            btnPlayYoutubeDetails.setOnClickListener {
+                if (skiPlace.youTubeLink.isNotBlank()) {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.youTubeLink)))
+                } else {
+                    Toast.makeText(context, NO_YOUTUBE_LINK, Toast.LENGTH_LONG).show()
+                }
             }
-        }
-        binding.btnWebCiteDetails.setOnClickListener {
-            if (skiPlace.webCite.isNotBlank()) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCite)))
-            } else {
-                Toast.makeText(context, NO_WEB_CITE, Toast.LENGTH_LONG).show()
+            btnWebCiteDetails.setOnClickListener {
+                if (skiPlace.webCite.isNotBlank()) {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCite)))
+                } else {
+                    Toast.makeText(context, NO_WEB_CITE, Toast.LENGTH_LONG).show()
+                }
             }
-        }
-        binding.btnWebCameraDetails.setOnClickListener {
-            if (skiPlace.webCamera.isNotBlank()) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
-            } else {
-                Toast.makeText(context, NO_WEB_CAMERAS, Toast.LENGTH_LONG).show()
+            btnWebCameraDetails.setOnClickListener {
+                if (skiPlace.webCamera.isNotBlank()) {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(skiPlace.webCamera)))
+                } else {
+                    Toast.makeText(context, NO_WEB_CAMERAS, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

@@ -104,8 +104,10 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
         saveAdapter = SaveAdapter() {
             skiPlace -> onSkiPlaceClick(skiPlace)
         }
-        binding.saveRecyclerView.adapter = saveAdapter
-        binding.saveRecyclerView.layoutManager = LinearLayoutManager(context)
+        with(binding) {
+            saveRecyclerView.adapter = saveAdapter
+            saveRecyclerView.layoutManager = LinearLayoutManager(context)
+        }
     }
 
     override fun onDestroyView() {

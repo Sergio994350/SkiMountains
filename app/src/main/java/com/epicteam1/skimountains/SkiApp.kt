@@ -2,6 +2,7 @@ package com.epicteam1.skimountains
 
 import android.app.Application
 import android.content.Context
+import com.epicteam1.skimountains.di.commonDispatchers
 import com.epicteam1.skimountains.feature_auth.di.featureAuthDataModule
 import com.epicteam1.skimountains.feature_auth.di.featureAuthDomainModule
 import com.epicteam1.skimountains.feature_auth.di.featureAuthPresentationModule
@@ -29,7 +30,8 @@ class SkiApp : Application() {
                 featureAuthDomainModule,
                 featureAuthPresentationModule,
                 featureWeatherDataModule,
-                featureWeatherDomainModule
+                featureWeatherDomainModule,
+                commonDispatchers
             )
         }
     }
