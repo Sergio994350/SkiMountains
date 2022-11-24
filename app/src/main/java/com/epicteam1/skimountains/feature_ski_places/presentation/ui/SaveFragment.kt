@@ -60,7 +60,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                val place = saveAdapter.differ.currentList[position]
+                val place = saveAdapter.getSkiPlace(position)
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
                     skiPlaceViewModel.deleteSkiPlace(place)
                     Snackbar.make(view, SKI_PLACE_DELETED, Snackbar.LENGTH_LONG).apply {
@@ -70,9 +70,9 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
                         show()
                     }.setAction(UNDO) {
                         skiPlaceViewModel.saveSkiPlace(place)
-                        skiPlaceViewModel.getAllSkiPlacesSaved()
                         findNavController().navigate(R.id.action_save_to_home)
                     }
+                    skiPlaceViewModel.getAllSkiPlacesSaved()
                 }
             }
         }
@@ -97,7 +97,7 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
     }
 
     private fun updateSkiPlacesSavedList(skiPlaces: List<SkiPlace>) {
-        saveAdapter.differ.submitList(skiPlaces)
+        saveAdapter.submitSavedSkiPlacesList(skiPlaces)
     }
 
     private fun setAdapter() {

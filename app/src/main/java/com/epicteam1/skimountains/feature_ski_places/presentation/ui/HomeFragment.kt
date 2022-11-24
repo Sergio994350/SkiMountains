@@ -58,7 +58,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun updateSkiPlacesList(skiPlaces: List<SkiPlace>) {
-        skiPlacesAdapter.differ.submitList(skiPlaces)
+        skiPlacesAdapter.submitSkiPlacesList(skiPlaces)
     }
 
     private fun onSkiPlaceClick(skiPlace: SkiPlace) {

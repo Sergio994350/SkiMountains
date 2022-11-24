@@ -31,7 +31,12 @@ class SkiPlacesAdapter(
         }
 
     }
-    val differ = AsyncListDiffer(this, differCallback)
+
+    private val differ = AsyncListDiffer(this, differCallback)
+
+    fun submitSkiPlacesList(skiPlaces: List<SkiPlace>) {
+        differ.submitList(skiPlaces)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_ski_place, parent, false)
