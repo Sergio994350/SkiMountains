@@ -7,8 +7,6 @@ interface SkiPlaceRepository {
 
     suspend fun getSkiPlaceById(skiPlaceId: String): SkiPlace
 
-    suspend fun upsert(skiPlace: SkiPlace)
-
     suspend fun saveSkiPlace(skiPlace: SkiPlace)
 
     suspend fun getAllSkiPlaces(filterString: String = String.EMPTY): List<SkiPlace>
