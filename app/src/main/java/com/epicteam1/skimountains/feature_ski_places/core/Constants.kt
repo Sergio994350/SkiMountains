@@ -18,7 +18,7 @@ object Constants {
     const val HAS_RAILWAY = "true"
     const val LOG_OUT = "Выйти"
     const val EMAIL_NOT_FOUND = "email не задан"
-    const val SIGN_UP = "Зарегистрироваться"
+    const val SIGN_UP = "Вход / Регистрация"
     const val LOG_OUT_SUCCESS = "Успешный выход"
     const val LOG_IN_SUCCESS = "Успешный вход"
     const val EMAIL_HAS_SEND = "Email отправлен"
