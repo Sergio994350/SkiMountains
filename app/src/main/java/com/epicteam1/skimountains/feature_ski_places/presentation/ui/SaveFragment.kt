@@ -73,7 +73,6 @@ class SaveFragment : Fragment(R.layout.fragment_save) {
                         skiPlaceViewModel.getAllSkiPlacesSaved()
                         findNavController().navigate(R.id.action_save_to_home)
                     }
-                    skiPlaceViewModel.getAllSkiPlacesSaved()
                 }
             }
         }

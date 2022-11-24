@@ -31,7 +31,7 @@ class SkiPlaceRepositoryImpl(
         val localSkiPlaces = skiDatabase.getSkiDao().getAllSkiPlaces().map { it.toSkiPlace() }
         if (localSkiPlaces.isEmpty()) {
             val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)
-                .map { it.toSkiPlace() }
+                .map { it.toSkiPlace() }.sortedBy { it.nameRus }
             skiDatabase.getSkiDao().insertList(skiPlaces.map { it.toSkiPlaceEntity() })
             return skiPlaces
         }
