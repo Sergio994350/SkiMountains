@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_220sdp"
+        android:layout_marginTop="@dimen/_230sdp"
         app:boxStrokeColor="@color/sky_blue"
         app:hintTextColor="@color/sky_blue"
         app:layout_constraintEnd_toEndOf="parent"
