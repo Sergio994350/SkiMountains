@@ -4,14 +4,11 @@ object Constants {
     const val FIREBASE_COLLECTION_NAME = "ski_places_dtb"
     const val LOCAL_DATABASE_NAME = "ski_place_local_db.db"
     const val ENTITY = "entity"
-    const val SKI_PLACE = "SkiPlace"
-    const val CATEGORY = "Category"
     const val PRE_SAVED = "1"
     const val NOT_SAVED = "0"
     const val NO_INTERNET = "Нет подключения к интернету"
     const val SORT_LIST = "Сортировка списка"
     const val LOAD_FROM_LOCAL_DATABASE = "Загрузка из локальной базы"
-    const val SUCCESS = "Success"
     const val DETAILS = "details"
     const val HOW_TO_GET_ARGS = "how_to_get_args"
     const val SKI_PLACE_DELETED = "Курорт удален"
@@ -65,7 +62,6 @@ object Constants {
     const val SKIPLACE_WEBCAMERA = "webCamera"
     const val SKIPLACE_WEBCITE = "webCite"
     const val SKIPLACE_YOUTUBELINK = "youTubeLink"
-    const val SKIPLACE_ENTITY = "entity"
     const val SKIPLACE_ISSAVED = "isSaved"
 
     val String.Companion.EMPTY: String get() = ""
@@ -75,6 +71,4 @@ object Constants {
     const val PASSWORD_NOT_MATCH = 3
 
     const val SPLASH_DELAY = 2000L
-    const val SORT_ASC = 0
-    const val SORT_DESC = 1
 }

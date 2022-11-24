@@ -104,7 +104,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 loadSkiPlacesList()
             }
             ivSortHome.setOnClickListener {
-                skiPlaceViewModel.sortList()
+                skiPlaceViewModel.sortSkiPlaceList()
             }
             searchSkiPlace.setEndIconOnClickListener {
                 val filterString: String = binding.searchSkiPlace.editText?.text.toString()

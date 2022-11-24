@@ -17,8 +17,6 @@ class SkiPlaceRepositoryImpl(
         skiDatabase.getSkiDao().getSkiPlaceById(skiPlaceId).toSkiPlace()
 
     // database
-    override suspend fun upsert(skiPlace: SkiPlace) = skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
-
     override suspend fun saveSkiPlace(skiPlace: SkiPlace) {
         if (skiPlace.isSaved != Constants.PRE_SAVED) {
             skiPlace.isSaved = Constants.PRE_SAVED

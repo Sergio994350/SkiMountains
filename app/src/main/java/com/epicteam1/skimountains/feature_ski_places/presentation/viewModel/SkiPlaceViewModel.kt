@@ -19,7 +19,6 @@ import com.epicteam1.skimountains.feature_ski_places.domain.usecases.GetSkiPlace
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.ReloadSkiPlacesUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SaveSkiPlaceUseCase
 import com.epicteam1.skimountains.feature_ski_places.domain.usecases.SortSkiPlaceListUseCase
-import com.epicteam1.skimountains.feature_ski_places.domain.usecases.UpsertUseCase
 import com.epicteam1.skimountains.feature_weather.domain.models.WeatherData
 import com.epicteam1.skimountains.feature_weather.domain.usecases.GetWeatherUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -34,7 +33,6 @@ class SkiPlaceViewModel(
     private val getSavedSkiPlacesUseCase: GetSavedSkiPlacesUseCase,
     private val getSkiPlaceDetailsUseCase: GetSkiPlaceDetailsUseCase,
     private val saveSkiPlacesUseCase: SaveSkiPlaceUseCase,
-    private val upsertUseCase: UpsertUseCase,
     private val reloadSkiPlacesUseCase: ReloadSkiPlacesUseCase,
     private val getWeatherUseCase: GetWeatherUseCase,
     private val sortSkiPlaceListUseCase: SortSkiPlaceListUseCase,
@@ -109,7 +107,7 @@ class SkiPlaceViewModel(
         }
     }
 
-    fun sortList() {
+    fun sortSkiPlaceList() {
         sortOrderAsc = !sortOrderAsc
         val sortedSkiPlaceList = sortSkiPlaceListUseCase.execute(_skiPlacesListLoaded.value, sortOrderAsc)
         _skiPlacesListLoaded.value = sortedSkiPlaceList
@@ -144,12 +142,6 @@ class SkiPlaceViewModel(
     fun deleteSkiPlace(skiPlace: SkiPlace) = viewModelScope.launch {
         withContext(ioDispatcher) {
             deleteSkiPlaceUseCase.execute(skiPlace)
-        }
-    }
-
-    fun saveSkiPlaceSaved(skiPlace: SkiPlace) = viewModelScope.launch {
-        withContext(ioDispatcher) {
-            upsertUseCase.execute(skiPlace)
         }
     }
 
