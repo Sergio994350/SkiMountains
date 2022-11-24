@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.epicteam1.skimountains.R
 import com.epicteam1.skimountains.databinding.FragmentHowtogetBinding
@@ -27,8 +28,10 @@ class HowToGetFragment : Fragment(R.layout.fragment_howtoget) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-          val howToGetArgs: SkiPlaceHowToGetArgs = arguments?.get(Constants.HOW_TO_GET_ARGS) as SkiPlaceHowToGetArgs
-          setHowToGetData(howToGetArgs)
+        val howToGetArgs: SkiPlaceHowToGetArgs =
+            arguments?.get(Constants.HOW_TO_GET_ARGS) as SkiPlaceHowToGetArgs
+        setHowToGetData(howToGetArgs)
+        setOnClickListeners(view)
     }
 
     private fun setHowToGetData(howToGetArgs: SkiPlaceHowToGetArgs) {
@@ -38,6 +41,14 @@ class HowToGetFragment : Fragment(R.layout.fragment_howtoget) {
             tvHowToGetGeoData.text = howToGetArgs.howToGetGeoData
         }
         Glide.with(this).load(howToGetArgs.howToGetPic).into(binding.imageViewHowToGet)
+    }
+
+    private fun setOnClickListeners(view: View) {
+        with(binding) {
+            cardViewBackHtg.setOnClickListener {
+                findNavController().apply { popBackStack() }
+            }
+        }
     }
 
     override fun onDestroyView() {
