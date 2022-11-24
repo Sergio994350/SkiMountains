@@ -16,12 +16,12 @@ class SkiPlaceRepositoryImpl(
     override suspend fun getSkiPlaceById(skiPlaceId: String) =
         skiDatabase.getSkiDao().getSkiPlaceById(skiPlaceId).toSkiPlace()
 
-    // database
     override suspend fun saveSkiPlace(skiPlace: SkiPlace) {
-        if (skiPlace.isSaved != Constants.PRE_SAVED) {
-            skiPlace.isSaved = Constants.PRE_SAVED
+        val skiPlaceEntity = skiPlace.toSkiPlaceEntity()
+        if (skiPlaceEntity.isSaved != Constants.PRE_SAVED) {
+            skiPlaceEntity.isSaved = Constants.PRE_SAVED
         }
-        skiDatabase.getSkiDao().upsert(skiPlace.toSkiPlaceEntity())
+        skiDatabase.getSkiDao().upsert(skiPlaceEntity)
     }
 
     override suspend fun getAllSkiPlaces(filterString: String): List<SkiPlace> {
@@ -42,10 +42,11 @@ class SkiPlaceRepositoryImpl(
         skiDatabase.getSkiDao().getSkiPlacesSavedList().map { it.toSkiPlace() }
 
     override suspend fun deleteSkiPlace(skiPlace: SkiPlace) {
-        if (skiPlace.isSaved == Constants.PRE_SAVED) {
-            skiPlace.isSaved = Constants.NOT_SAVED
+        val skiPlaceEntity = skiPlace.toSkiPlaceEntity()
+        if (skiPlaceEntity.isSaved == Constants.PRE_SAVED) {
+            skiPlaceEntity.isSaved = Constants.NOT_SAVED
         }
-        skiDatabase.getSkiDao().deleteSkiPlace(skiPlace.toSkiPlaceEntity())
+        skiDatabase.getSkiDao().deleteSkiPlace(skiPlaceEntity)
     }
 
     override suspend fun reloadSkiPlaces() {

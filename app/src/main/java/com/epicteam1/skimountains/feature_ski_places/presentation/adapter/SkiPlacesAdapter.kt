@@ -29,13 +29,14 @@ class SkiPlacesAdapter(
         override fun areContentsTheSame(oldItem: SkiPlace, newItem: SkiPlace): Boolean {
             return oldItem == newItem
         }
-
     }
 
     private val differ = AsyncListDiffer(this, differCallback)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitSkiPlacesList(skiPlaces: List<SkiPlace>) {
         differ.submitList(skiPlaces)
+        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

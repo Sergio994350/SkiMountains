@@ -32,8 +32,10 @@ class SaveAdapter(
 
     fun getSkiPlace(position: Int): SkiPlace = differ.currentList[position]
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitSavedSkiPlacesList(skiPlaces: List<SkiPlace>) {
         differ.submitList(skiPlaces)
+        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
