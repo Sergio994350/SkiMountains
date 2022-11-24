@@ -37,7 +37,7 @@
     <string name="enter_your_password">Введите Ваш пароль</string>
     <string name="repeat_your_password">Повторите Ваш пароль</string>
     <string name="password_not_match">Пароли не совпадают</string>
-    <string name="sign_up">Зарегистрироваться</string>
+    <string name="sign_up">Вход / Регистрация</string>
     <string name="log_out">Выйти</string>
     <string name="already_registered_enter">Уже зарегистрирован, войти</string>
     <string name="enter">Войти</string>
