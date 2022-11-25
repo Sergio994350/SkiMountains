@@ -30,8 +30,7 @@ class SkiPlaceRepositoryImpl(
         }
         val localSkiPlaces = skiDatabase.getSkiDao().getAllSkiPlaces().map { it.toSkiPlace() }
         if (localSkiPlaces.isEmpty()) {
-            val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)
-                .map { it.toSkiPlace() }.sortedBy { it.nameRus }
+            val skiPlaces = getRemoteSkiPlaces()
             skiDatabase.getSkiDao().insertList(skiPlaces.map { it.toSkiPlaceEntity() })
             return skiPlaces
         }
@@ -51,8 +50,11 @@ class SkiPlaceRepositoryImpl(
 
     override suspend fun reloadSkiPlaces() {
         skiDatabase.getSkiDao().deleteAllRecords()
-        val skiPlaces = firebaseDataSource.getCollection(Constants.FIREBASE_COLLECTION_NAME)
-            .map { it.toSkiPlace() }
+        val skiPlaces = getRemoteSkiPlaces()
         skiDatabase.getSkiDao().insertList(skiPlaces.map { it.toSkiPlaceEntity() })
     }
+
+    private suspend fun getRemoteSkiPlaces(): List<SkiPlace> = firebaseDataSource
+        .getCollection(Constants.FIREBASE_COLLECTION_NAME, Constants.SKIPLACE_NAMERUS)
+        .map { it.toSkiPlace() }
 }

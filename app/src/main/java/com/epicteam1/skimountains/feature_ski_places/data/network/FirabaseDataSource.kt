@@ -4,7 +4,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 
 interface FirebaseDataSource {
 
-    suspend fun getCollection(collectionName: String): List<DocumentSnapshot>
+    suspend fun getCollection(collectionName: String, orderFieldName: String): List<DocumentSnapshot>
 
     suspend fun getDocument(collectionName: String, documentId: String): DocumentSnapshot
 }
